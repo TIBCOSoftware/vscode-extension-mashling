@@ -12,14 +12,26 @@
   "activationEvents": [
     "onLanguage:json",
     "onLanguage:yaml",
-    "onCommand:mashling.createGateway"
+    "onCommand:mashling.createGateway",
+    "onCommand:mashling.installMashling",
+    "onCommand:mashling.updateMashling"
   ],
   "main": "./out/src/extension",
   "contributes": {
     "commands": [
       {
         "command": "mashling.createGateway",
-        "title": "Create Gateway",
+        "title": "Create Mashling Gateway",
+        "category": "Mashling"
+      },
+      {
+        "command": "mashling.installMashling",
+        "title": "Install Mashling",
+        "category": "Mashling"
+      },
+      {
+        "command": "mashling.updateMashling",
+        "title": "Update Mashling",
         "category": "Mashling"
       }
     ],
