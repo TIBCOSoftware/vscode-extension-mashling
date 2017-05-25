@@ -1,47 +1,148 @@
 {
-    "title": "JSON schema for Mashling config file",
-    "$schema": "",
-    "type": "object",
-    "properties": {
-        "gateway": {
+    "anyOf": [
+        {
+            "title": "JSON schema for Mashling config file",
+            "$schema": "",
             "type": "object",
-            "description": "Mashling json gateway object",
+            "default": {},
             "properties": {
-                "name": {
-                    "default": "",
-                    "description": "My Mashling application name",
-                    "type": "string"
-                },
-                "version": {
-                    "default": "1.0.0",
-                    "description": "version number",
-                    "type": "string"
-                },
-                "description": {
-                    "default": "My Mashling application description",
-                    "description": "Application description",
-                    "type": "string"
-                },
-                "configurations": {
-                    "$ref": "configurationsSchema.json#/configurations"
-                },
-                "triggers": {
-                    "$ref": "triggersSchema.json#/triggers"
-                },
-                "event_handlers": {
-                    "anyOf": [
-                        {
-                            "$ref": "eventhandlersSchema.json#/event_handlers_with_inline_actions"
+                "gateway": {
+                    "type": "object",
+                    "description": "Mashling json gateway object",
+                    "properties": {
+                        "name": {
+                            "default": "demoapp",
+                            "description": "My Mashling application name",
+                            "type": "string"
                         },
+                        "version": {
+                            "default": "1.0.0",
+                            "description": "version number",
+                            "type": "string"
+                        },
+                        "description": {
+                            "default": "My Mashling application description",
+                            "description": "Application description",
+                            "type": "string"
+                        },
+                        "configurations": {
+                            "$ref": "configurationsSchema.json#/configurations"
+                        },
+                        "triggers": {
+                            "$ref": "triggersSchema.json#/triggers"
+                        },
+                        "event_handlers": {
+                            "anyOf": [
+                                {
+                                    "$ref": "eventhandlersSchema.json#/event_handlers_with_inline_actions"
+                                },
+                                {
+                                    "$ref": "eventhandlersSchema.json#/event_handlers_with_reference_for_actions"
+                                }
+                            ]
+                        },
+                        "event_links": {
+                            "$ref": "eventlinksSchema.json#/event_links"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "title": "JSON schema for Mashling config file",
+            "$schema": "",
+            "type": "object",
+            "default": {
+                "gateway": {
+                    "name": "demoapp",
+                    "version": "1.0.0",
+                    "description": "This is the first microgateway app",
+                    "configurations": [
                         {
-                            "$ref": "eventhandlersSchema.json#/event_handlers_with_reference_for_actions"
+                            "name": "kafkaConfig",
+                            "type": "github.com/wnichols/kafkasub",
+                            "description": "Configuration for kafka cluster",
+                            "settings": {
+                                "BrokerUrl": "localhost:9092"
+                            }
+                        }
+                    ],
+                    "triggers": [
+                        {
+                            "name": "rest_trigger",
+                            "description": "The trigger on 'pets' endpoint",
+                            "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
+                            "settings": {
+                                "port": "9096",
+                                "method": "GET",
+                                "path": "/pets/:petId"
+                            }
+                        }
+                    ],
+                    "event_handlers": [
+                        {
+                            "name": "get_pet_success_handler",
+                            "description": "Handle the pet access",
+                            "reference": "github.com/TIBCOSoftware/mashling-lib/flow/flogo.json",
+                            "params": {
+                                "uri": "petstore.swagger.io/v2/pet/3"
+                            }
+                        }
+                    ],
+                    "event_links": [
+                        {
+                            "trigger": "rest_trigger",
+                            "success_paths": [
+                                {
+                                    "handler": "get_pet_success_handler"
+                                }
+                            ]
                         }
                     ]
-                },
-                "event_links": {
-                    "$ref": "eventlinksSchema.json#/event_links"
+                }
+            },
+            "properties": {
+                "gateway": {
+                    "type": "object",
+                    "description": "Mashling json gateway object",
+                    "properties": {
+                        "name": {
+                            "default": "",
+                            "description": "My Mashling application name",
+                            "type": "string"
+                        },
+                        "version": {
+                            "default": "1.0.0",
+                            "description": "version number",
+                            "type": "string"
+                        },
+                        "description": {
+                            "default": "My Mashling application description",
+                            "description": "Application description",
+                            "type": "string"
+                        },
+                        "configurations": {
+                            "$ref": "configurationsSchema.json#/configurations"
+                        },
+                        "triggers": {
+                            "$ref": "triggersSchema.json#/triggers"
+                        },
+                        "event_handlers": {
+                            "anyOf": [
+                                {
+                                    "$ref": "eventhandlersSchema.json#/event_handlers_with_inline_actions"
+                                },
+                                {
+                                    "$ref": "eventhandlersSchema.json#/event_handlers_with_reference_for_actions"
+                                }
+                            ]
+                        },
+                        "event_links": {
+                            "$ref": "eventlinksSchema.json#/event_links"
+                        }
+                    }
                 }
             }
         }
-    }
+    ]
 }

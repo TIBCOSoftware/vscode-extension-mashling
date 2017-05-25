@@ -6,15 +6,10 @@
             "type": "object",
             "description": "event links Object",
             "default": {
-                "trigger": "",
+                "trigger": "rest_trigger",
                 "success_paths": [
                     {
-                        "handler": ""
-                    }
-                ],
-                "error_paths": [
-                    {
-                        "handler": ""
+                        "handler": "get_pet_success_handler"
                     }
                 ]
             },

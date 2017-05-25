@@ -6,15 +6,15 @@
             "type": "object",
             "description": "configurations Object",
             "default": {
-                "name": "",
-                "type": "",
-                "description": "",
-                "settings": {
-                    "brokers": "",
-                    "userName": "",
-                    "password": ""
-                }
-            },
+				"name": "rest_trigger",
+				"description": "The trigger on 'pets' endpoint",
+				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
+				"settings": {
+					"port": "9096",
+					"method": "GET",
+					"path": "/pets/:petId"
+				}
+			},
             "properties": {
                 "name": {
                     "default": "",

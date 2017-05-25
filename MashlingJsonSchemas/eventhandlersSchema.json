@@ -7,48 +7,13 @@
             "description": "event_handlers object",
             "required": ["name"],
             "default": {
-                "name": "",
-                "description": "",
-                "definition": {
-                    "data": {
-                        "flow": {
-                            "type": 1,
-                            "attributes": [],
-                            "rootTask": {
-                                "id": 1,
-                                "type": 1,
-                                "tasks": [
-                                    {
-                                        "id": 2,
-                                        "name": "",
-                                        "description": "",
-                                        "type": 1,
-                                        "activityType": "",
-                                        "activityRef": "",
-                                        "attributes": [
-                                            {
-                                                "name": "",
-                                                "value": "",
-                                                "required": false,
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "links": [],
-                                "attributes": []
-                            }
-                        }
-                    },
-                    "id": "",
-                    "ref": ""
-                },
-                "params": {
-                    "time-span": "",
-                    "message": "",
-                    "limit": 1
-                }
-            },
+				"name": "get_pet_success_handler",
+				"description": "Handle the pet access",
+				"reference": "github.com/TIBCOSoftware/mashling-lib/flow/flogo.json",
+				"params": {
+					"uri": "petstore.swagger.io/v2/pet/3"
+				}
+			},
             "properties": {
                 "name": {
                     "type": "string",
@@ -196,15 +161,13 @@
             "description": "event_handlers object",
             "required": ["name"],
             "default": {
-                "name": "",
-                "description": "",
-                "reference": "",
-                "params": {
-                    "time-span": "",
-                    "message": "",
-                    "limit": 1
-                }
-            },
+				"name": "get_pet_success_handler",
+				"description": "Handle the pet access",
+				"reference": "github.com/TIBCOSoftware/mashling-lib/flow/flogo.json",
+				"params": {
+					"uri": "petstore.swagger.io/v2/pet/3"
+				}
+			},
             "properties": {
                 "name": {
                     "type": "string",
