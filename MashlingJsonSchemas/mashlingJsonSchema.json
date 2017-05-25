@@ -1,0 +1,47 @@
+{
+    "title": "JSON schema for Mashling config file",
+    "$schema": "",
+    "type": "object",
+    "properties": {
+        "gateway": {
+            "type": "object",
+            "description": "Mashling json gateway object",
+            "properties": {
+                "name": {
+                    "default": "",
+                    "description": "My Mashling application name",
+                    "type": "string"
+                },
+                "version": {
+                    "default": "1.0.0",
+                    "description": "version number",
+                    "type": "string"
+                },
+                "description": {
+                    "default": "My Mashling application description",
+                    "description": "Application description",
+                    "type": "string"
+                },
+                "configurations": {
+                    "$ref": "configurationsSchema.json#/configurations"
+                },
+                "triggers": {
+                    "$ref": "triggersSchema.json#/triggers"
+                },
+                "event_handlers": {
+                    "anyOf": [
+                        {
+                            "$ref": "eventhandlersSchema.json#/event_handlers_with_inline_actions"
+                        },
+                        {
+                            "$ref": "eventhandlersSchema.json#/event_handlers_with_reference_for_actions"
+                        }
+                    ]
+                },
+                "event_links": {
+                    "$ref": "eventlinksSchema.json#/event_links"
+                }
+            }
+        }
+    }
+}

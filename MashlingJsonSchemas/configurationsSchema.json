@@ -1,0 +1,68 @@
+{
+    "configurations": {
+        "type": "array",
+        "description": "Application configurations",
+        "items": {
+            "type": "object",
+            "description": "configurations Object",
+            "default": {
+                "name": "",
+                "type": "",
+                "description": "",
+                "settings": {
+                    "brokers": "",
+                    "userName": "",
+                    "password": ""
+                }
+            },
+            "properties": {
+                "name": {
+                    "default": "",
+                    "description": "kafkaConfig",
+                    "type": "string"
+                },
+                "type": {
+                    "default": "github.com/TIBCOSoftware/flogo-contrib/config/kafkaConfig",
+                    "description": "version number",
+                    "type": "string"
+                },
+                "description": {
+                    "default": "Configuration for kafka cluster",
+                    "description": "Configuration for kafka cluster",
+                    "type": "string"
+                },
+                "settings": {
+                    "type": "object",
+                    "description": "Configuration for kafka cluster",
+                    "properties": {
+                        "brokers": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "default": "localhost:9092"
+                                    }
+                                },
+                                {
+                                    "type": "string",
+                                    "default": "localhost:9092"
+                                }
+                            ]
+                        },
+                        "username": {
+                            "type": "string",
+                            "default": "admin",
+                            "description": "Username description"
+                        },
+                        "password": {
+                            "type": "string",
+                            "default": "admin",
+                            "description": "Password description"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
