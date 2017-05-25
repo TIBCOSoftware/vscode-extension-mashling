@@ -12,7 +12,8 @@
   "activationEvents": [
     "onLanguage:json",
     "onLanguage:yaml",
-    "onCommand:mashling.createGateway",
+    "onCommand:mashling.createSampleGateway",
+    "onCommand:mashling.createGatewayUsingGatewayDescriptor",
     "onCommand:mashling.installMashling",
     "onCommand:mashling.updateMashling"
   ],
@@ -20,8 +21,13 @@
   "contributes": {
     "commands": [
       {
-        "command": "mashling.createGateway",
-        "title": "Create Mashling Gateway",
+        "command": "mashling.createSampleGateway",
+        "title": "Create the base sample project with a specific name",
+        "category": "Mashling"
+      },
+      {
+        "command": "mashling.createGatewayUsingGatewayDescriptor",
+        "title": "Create a mashling gateway project from an existing mashling gateway descriptor",
         "category": "Mashling"
       },
       {

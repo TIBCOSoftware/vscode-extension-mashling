@@ -16,8 +16,12 @@ export function activate(context: ExtensionContext) {
 
 	function registerCommands() {
 
-		var disposable = vscode.commands.registerCommand('mashling.createGateway', function () {
-			createGateway();
+		var disposable = vscode.commands.registerCommand('mashling.createSampleGateway', function () {
+			createSampleGateway();
+		});
+
+		var disposable = vscode.commands.registerCommand('mashling.createGatewayUsingGatewayDescriptor', function () {
+			createGatewayUsingGatewayDescriptor();
 		});
 
 		var disposable = vscode.commands.registerCommand('mashling.installMashling', function () {
@@ -27,21 +31,53 @@ export function activate(context: ExtensionContext) {
 		var disposable = vscode.commands.registerCommand('mashling.updateMashling', function () {
 			updateMashling();
 		});
+		
 		// Push the disposable to the context's subscriptions
 		context.subscriptions.push(disposable);
 	}
 
-	function createGateway() {
+	function createSampleGateway() {
 
 		let activeDocPath = vscode.window.activeTextEditor.document.uri.path;
 		activeDocPath = activeDocPath.substring(1, activeDocPath.length);
-		let appName = vscode.window.showInputBox({ prompt: 'Enter the mashling app name' }).then(val => runCommand(val));
-		function runCommand(appName) {
-			terminal.show(true);
-			terminal.sendText('mashling create ' + appName);
-		};
-
+		vscode.window.showInputBox({ prompt: 'Enter the path where mashling app should be created' })
+			.then(function (path) {
+				var driveName = path.split(':')[0] + ':';
+				terminal.show(true);
+				terminal.sendText(driveName);
+				terminal.sendText('cd ' + path);
+				vscode.window.showInputBox({ prompt: 'Enter the application name' })
+					.then(function (appName) {
+						terminal.show(true);
+						terminal.sendText('mashling create ' + appName);
+					});
+			});
 	}
+
+	function createGatewayUsingGatewayDescriptor() {
+		let activeDocPath = vscode.window.activeTextEditor.document.uri.path;
+		activeDocPath = activeDocPath.substring(1, activeDocPath.length);
+		vscode.window.showInputBox({ prompt: 'Enter the path where mashling app should be created' })
+			.then(function (path) {
+				var driveName = path.split(':')[0] + ':';
+				terminal.show(true);
+				terminal.sendText(driveName);
+				terminal.sendText('cd ' + path);
+				terminal.sendText("mashling create -f mashling.json");
+			});
+	}
+
+	// function getPathAndGoIntoTheFolder() {
+	// 	let activeDocPath = vscode.window.activeTextEditor.document.uri.path;
+	// 	activeDocPath = activeDocPath.substring(1, activeDocPath.length);
+	// 	vscode.window.showInputBox({ prompt: 'Enter the path where mashling app should be created' })
+	// 		.then(function (path) {
+	// 			var driveName = path.split(':')[0] + ':';
+	// 			terminal.show(true);
+	// 			terminal.sendText(driveName);
+	// 			terminal.sendText('cd ' + path);
+	// 		});
+	// }
 
 	function installMashling() {
 		terminal.show(true);
