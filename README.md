@@ -1,20 +1,42 @@
 # mashling-vscode-extension
+
 Project Mashling VSCode Extension
 
-Features : 
->auto-complete
->hover-provider
->Json validation
-To run the extension follow the instructions below. 
-Download vscode from https://code.visualstudio.com/
-Clone the repository using following command:
-git clone https://git.tibco.com/git/product/tibcolnd.git -b <branch-name> --single-branch <directory-name>
-Go to the vscode-mashling-extension folder
-and do:
-> npm install
-> code .
-The above installs all dependencies and opens a VS Code instance.
-Now click on f5 in the instance. It will take you to the extensions development Host window.
-Here, create a json file. 
-To trigger auto-complete manually, click ctrl + space OR start typing quotes.
-You should be able to see auto-complete suggestions. Also on Hover, it will show information about the symbol/object that's below the mouse cursor.
+## Features
+
+*__intellisense : Provides word based completions for mashling json property names.
+
+*__code completion snippets : Provides json snippets for gateway json body and other subsections.
+
+*__hover-provider : Provides information for property names on hover.
+
+*__Json validation : Validates the json against predefined schema.
+
+*__Create mashling gateway: Once the json is ready , mashling gateway can be created directly through vscode command palette.
+Press `Ctrl + shift + p` and run the command named `mashling : create gateway`.
+
+
+## Installing the extension
+
+You can install the extension using the VS Code --install-extension command line switch
+```
+code --install-extension mashling-support-0.0.1.vsix
+```
+
+## Known Issues
+
+This release has been tested on Microsoft Windows 10.
+
+## Contributors
+
+[Tanvi Bhatia](https://github.com/tbhatia1912)
+
+## Release Notes
+
+### 0.0.1
+Initial release of mashling-support on Windows
+
+## License
+Copyright © 2017. TIBCO Software Inc.
+This file is subject to the license terms contained
+in the license file that is distributed with this file.
