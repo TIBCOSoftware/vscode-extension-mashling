@@ -4,15 +4,15 @@ Project Mashling VSCode Extension
 
 ## Features
 
-*__intellisense__ : Provides word based completions for mashling json property names.
+* __intellisense__ : Provides word based completions for mashling json property names.
 
-*__code completion snippets__ : Provides json snippets for gateway json body and other subsections.
+* __code completion snippets__ : Provides json snippets for gateway json body and other subsections.
 
-*__hover-provider__ : Provides information for property names on hover.
+* __hover-provider__ : Provides information for property names on hover.
 
-*__Json validation__ : Validates the json against predefined schema.
+* __Json validation__ : Validates the json against predefined schema.
 
-*__Create mashling gateway__ : Once the json is ready , mashling gateway can be created directly through vscode command palette.
+* __Create mashling gateway__ : Once the json is ready , mashling gateway can be created directly through vscode command palette.
 Press `Ctrl + shift + p` and run the command named `mashling : create gateway`.
 
 
