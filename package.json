@@ -41,7 +41,7 @@
     },
     "jsonValidation": [
       {
-        "fileMatch": "*.mashling.*",
+        "fileMatch": "mashling.json",
         "url": "./MashlingJsonSchemas/mashlingJsonSchema.json"
       }
     ]
