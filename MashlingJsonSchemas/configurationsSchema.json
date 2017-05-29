@@ -5,6 +5,7 @@
         "items": {
             "type": "object",
             "description": "configurations Object",
+            "required":["name", "type", "settings"],
             "default": {
 				"name": "rest_trigger",
 				"description": "The trigger on 'pets' endpoint",
@@ -34,6 +35,7 @@
                 "settings": {
                     "type": "object",
                     "description": "Configuration for kafka cluster",
+                    "additionalProperties": { "type": "string" },
                     "properties": {
                         "brokers": {
                             "anyOf": [

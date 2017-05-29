@@ -1,15 +1,17 @@
 {
 	"gateway": {
 		"name": "demoapp",
-		"version": "1.0.0",
-		"description": "This is the first microgateway app",
 		"configurations": [
 			{
-				"name": "kafkaConfig",
-				"type": "github.com/wnichols/kafkasub",
-				"description": "Configuration for kafka cluster",
+				"name": "rest_trigger",
+				"description": "The trigger on 'pets' endpoint",
+				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
 				"settings": {
-					"BrokerUrl": "localhost:9092"
+					"port": "9096",
+					"method": "GET",
+					"path": "/pets/:petId",
+					"brokers":"localhost:9092",
+					"password": "admin"
 				}
 			}
 		],
@@ -25,25 +27,28 @@
 				}
 			}
 		],
-		"event_handlers": [
+		"description": "My Mashling application description",
+		"event_handlers":[
 			{
 				"name": "get_pet_success_handler",
 				"description": "Handle the pet access",
-				"reference": "github.com/TIBCOSoftware/mashling-lib/flow/flogo.json",
+				"definition": {},
+				"params": {
+					"uri": "petstore.swagger.io/v2/pet/3"
+				}
+			},
+			{
+				"name": "get_pet_success_handler",
+				"description": "Handle the pet access",
+				"definition": {},
 				"params": {
 					"uri": "petstore.swagger.io/v2/pet/3"
 				}
 			}
 		],
 		"event_links": [
-			{
-				"trigger": "rest_trigger",
-				"success_paths": [
-					{
-						"handler": "get_pet_success_handler"
-					}
-				]
-			}
-		]
+			
+		],
+		"version": "1.0.0"
 	}
 }

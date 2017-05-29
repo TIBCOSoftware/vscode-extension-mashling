@@ -5,6 +5,7 @@
         "items": {
             "type": "object",
             "description": "triggers Object",
+            "required": ["name", "type", "settings"],
             "default": {
 				"name": "rest_trigger",
 				"description": "The trigger on 'pets' endpoint",
@@ -62,7 +63,8 @@
                         }
                     }
                 }
-            }
+            },
+            "additionalProperties": false
         }
     }
 }

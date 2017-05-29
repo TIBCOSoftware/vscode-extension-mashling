@@ -8,6 +8,14 @@
             "properties": {
                 "gateway": {
                     "type": "object",
+                    "required": [
+                        "name",
+                        "version",
+                        "configurations",
+                        "triggers",
+                        "event_handlers",
+                        "event_links"
+                    ],
                     "description": "Mashling json gateway object",
                     "properties": {
                         "name": {
@@ -32,7 +40,7 @@
                             "$ref": "triggersSchema.json#/triggers"
                         },
                         "event_handlers": {
-                            "anyOf": [
+                            "oneOf": [
                                 {
                                     "$ref": "eventhandlersSchema.json#/event_handlers_with_inline_actions"
                                 },
@@ -44,9 +52,11 @@
                         "event_links": {
                             "$ref": "eventlinksSchema.json#/event_links"
                         }
-                    }
+                    },
+                    "additionalProperties": false
                 }
-            }
+            },
+            "additionalProperties": false
         },
         {
             "title": "JSON schema for Mashling config file",
@@ -105,6 +115,14 @@
                 "gateway": {
                     "type": "object",
                     "description": "Mashling json gateway object",
+                    "required": [
+                        "name",
+                        "version",
+                        "configurations",
+                        "triggers",
+                        "event_handlers",
+                        "event_links"
+                    ],
                     "properties": {
                         "name": {
                             "default": "",
@@ -140,9 +158,11 @@
                         "event_links": {
                             "$ref": "eventlinksSchema.json#/event_links"
                         }
-                    }
+                    },
+                    "additionalProperties": false
                 }
-            }
+            },
+            "additionalProperties": false
         }
     ]
 }

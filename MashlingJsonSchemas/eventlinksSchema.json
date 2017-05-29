@@ -5,6 +5,7 @@
         "items": {
             "type": "object",
             "description": "event links Object",
+            "required": ["trigger", "success_paths"],
             "default": {
                 "trigger": "rest_trigger",
                 "success_paths": [
