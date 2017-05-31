@@ -7,13 +7,11 @@
             "description": "configurations Object",
             "required":["name", "type", "settings"],
             "default": {
-				"name": "rest_trigger",
-				"description": "The trigger on 'pets' endpoint",
-				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
+				"name": "kafkaConfig",
+				"type": "github.com/wnichols/kafkasub",
+				"description": "Configuration for kafka cluster",
 				"settings": {
-					"port": "9096",
-					"method": "GET",
-					"path": "/pets/:petId"
+					"BrokerUrl": "localhost:9092"
 				}
 			},
             "properties": {
