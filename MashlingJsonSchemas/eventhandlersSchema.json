@@ -1,215 +1,213 @@
 {
-    "event_handlers_with_inline_actions": {
+    "event_handlers": {
         "type": "array",
         "description": "Application event_handlers",
         "items": {
-            "type": "object",
-            "description": "event_handlers object",
-            "required": [
-                "name"
-            ],
-            "default": {
-                "name": "get_pet_success_handler",
-                "description": "Handle the pet access",
-                "definition": {},
-                "params": {
-                    "uri": "petstore.swagger.io/v2/pet/3"
-                }
-            },
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "default": "",
-                    "description": "event handler name"
-                },
-                "description": {
-                    "type": "string",
-                    "default": "",
-                    "description": "event handler description"
-                },
-                "definition": {
+            "anyOf": [
+                {
                     "type": "object",
-                    "description": "event handler input",
+                    "description": "event_handlers object",
+                    "required": [
+                        "name"
+                    ],
+                    "default": {
+                        "name": "get_pet_success_handler",
+                        "description": "Handle the pet access",
+                        "reference": "github.com/TIBCOSoftware/mashling-lib/flow/flogo.json",
+                        "params": {
+                            "uri": "petstore.swagger.io/v2/pet/3"
+                        }
+                    },
                     "properties": {
-                        "data": {
+                        "name": {
+                            "type": "string",
+                            "default": "",
+                            "description": "event handler name"
+                        },
+                        "description": {
+                            "type": "string",
+                            "default": "",
+                            "description": "event handler description"
+                        },
+                        "params": {
                             "type": "object",
+                            "description": "event handler input",
                             "properties": {
-                                "flow": {
+                                "time-span": {
+                                    "type": "string",
+                                    "default": "minute"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "default": "${}"
+                                },
+                                "limit": {
+                                    "type": "integer",
+                                    "default": 1001
+                                }
+                            }
+                        },
+                        "reference": {
+                            "type": "string",
+                            "default": "github.com/TIBCOSoftware/mashling/flows/ConsoleErrorHandler/flow.json",
+                            "description": "event handler reference"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                {
+                    "type": "object",
+                    "description": "event_handlers object",
+                    "required": [
+                        "name"
+                    ],
+                    "default": {
+                        "name": "get_pet_success_handler",
+                        "description": "Handle the pet access",
+                        "definition": {},
+                        "params": {
+                            "uri": "petstore.swagger.io/v2/pet/3"
+                        }
+                    },
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "default": "",
+                            "description": "event handler name"
+                        },
+                        "description": {
+                            "type": "string",
+                            "default": "",
+                            "description": "event handler description"
+                        },
+                        "definition": {
+                            "type": "object",
+                            "description": "event handler input",
+                            "properties": {
+                                "data": {
                                     "type": "object",
                                     "properties": {
-                                        "type": {
-                                            "type": "integer",
-                                            "default": 1
-                                        },
-                                        "attributes": {
-                                            "type": "array"
-                                        },
-                                        "rootTask": {
+                                        "flow": {
                                             "type": "object",
                                             "properties": {
-                                                "id": {
-                                                    "type": "integer",
-                                                    "default": 1
-                                                },
                                                 "type": {
                                                     "type": "integer",
                                                     "default": 1
                                                 },
-                                                "tasks": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "id": {
-                                                                "type": "integer",
-                                                                "default": 2
-                                                            },
-                                                            "name": {
-                                                                "type": "string",
-                                                                "default": "Log Message"
-                                                            },
-                                                            "description": {
-                                                                "type": "string",
-                                                                "default": "Simple Log Activity"
-                                                            },
-                                                            "type": {
-                                                                "type": "integer",
-                                                                "default": 1
-                                                            },
-                                                            "activityType": {
-                                                                "type": "string",
-                                                                "default": "tibco-log"
-                                                            },
-                                                            "activityRef": {
-                                                                "type": "string",
-                                                                "default": "github.com/TIBCOSoftware/flogo-contrib/activity/log"
-                                                            },
-                                                            "attributes": {
-                                                                "type": "array",
-                                                                "items": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "name": {
-                                                                            "type": "string",
-                                                                            "default": "message"
-                                                                        },
-                                                                        "value": {
-                                                                            "type": "string",
-                                                                            "default": "${}"
-                                                                        },
-                                                                        "required": {
-                                                                            "type": "boolean",
-                                                                            "default": false
-                                                                        },
-                                                                        "type": {
-                                                                            "type": "string",
-                                                                            "default": "string"
+                                                "attributes": {
+                                                    "type": "array"
+                                                },
+                                                "rootTask": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "default": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "integer",
+                                                            "default": 1
+                                                        },
+                                                        "tasks": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "id": {
+                                                                        "type": "integer",
+                                                                        "default": 2
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string",
+                                                                        "default": "Log Message"
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string",
+                                                                        "default": "Simple Log Activity"
+                                                                    },
+                                                                    "type": {
+                                                                        "type": "integer",
+                                                                        "default": 1
+                                                                    },
+                                                                    "activityType": {
+                                                                        "type": "string",
+                                                                        "default": "tibco-log"
+                                                                    },
+                                                                    "activityRef": {
+                                                                        "type": "string",
+                                                                        "default": "github.com/TIBCOSoftware/flogo-contrib/activity/log"
+                                                                    },
+                                                                    "attributes": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "name": {
+                                                                                    "type": "string",
+                                                                                    "default": "message"
+                                                                                },
+                                                                                "value": {
+                                                                                    "type": "string",
+                                                                                    "default": "${}"
+                                                                                },
+                                                                                "required": {
+                                                                                    "type": "boolean",
+                                                                                    "default": false
+                                                                                },
+                                                                                "type": {
+                                                                                    "type": "string",
+                                                                                    "default": "string"
+                                                                                }
+                                                                            }
                                                                         }
                                                                     }
                                                                 }
                                                             }
+                                                        },
+                                                        "links": {
+                                                            "type": "array"
+                                                        },
+                                                        "attributes": {
+                                                            "type": "array"
                                                         }
                                                     }
-                                                },
-                                                "links": {
-                                                    "type": "array"
-                                                },
-                                                "attributes": {
-                                                    "type": "array"
                                                 }
                                             }
                                         }
                                     }
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "default": "order_success_handler"
+                                },
+                                "ref": {
+                                    "type": "string",
+                                    "default": "github.com/TIBCOSoftware/flogo-contrib/action/flow"
                                 }
                             }
                         },
-                        "id": {
-                            "type": "string",
-                            "default": "order_success_handler"
-                        },
-                        "ref": {
-                            "type": "string",
-                            "default": "github.com/TIBCOSoftware/flogo-contrib/action/flow"
+                        "params": {
+                            "type": "object",
+                            "description": "event handler input",
+                            "properties": {
+                                "time-span": {
+                                    "type": "string",
+                                    "default": "minute"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "default": "${}"
+                                },
+                                "limit": {
+                                    "type": "integer",
+                                    "default": 1001
+                                }
+                            }
                         }
-                    }
-                },
-                "params": {
-                    "type": "object",
-                    "description": "event handler input",
-                    "properties": {
-                        "time-span": {
-                            "type": "string",
-                            "default": "minute"
-                        },
-                        "message": {
-                            "type": "string",
-                            "default": "${}"
-                        },
-                        "limit": {
-                            "type": "integer",
-                            "default": 1001
-                        }
-                    }
+                    },
+                    "additionalProperties": false
                 }
-            },
-            "additionalProperties": false
-        },
-        "additionalItems": false
-    },
-    "event_handlers_with_reference_for_actions": {
-        "type": "array",
-        "description": "Application event_handlers",
-        "items": {
-            "type": "object",
-            "description": "event_handlers object",
-            "required": [
-                "name"
-            ],
-            "default": {
-                "name": "get_pet_success_handler",
-                "description": "Handle the pet access",
-                "reference": "github.com/TIBCOSoftware/mashling-lib/flow/flogo.json",
-                "params": {
-                    "uri": "petstore.swagger.io/v2/pet/3"
-                }
-            },
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "default": "",
-                    "description": "event handler name"
-                },
-                "description": {
-                    "type": "string",
-                    "default": "",
-                    "description": "event handler description"
-                },
-                "params": {
-                    "type": "object",
-                    "description": "event handler input",
-                    "properties": {
-                        "time-span": {
-                            "type": "string",
-                            "default": "minute"
-                        },
-                        "message": {
-                            "type": "string",
-                            "default": "${}"
-                        },
-                        "limit": {
-                            "type": "integer",
-                            "default": 1001
-                        }
-                    }
-                },
-                "reference": {
-                    "type": "string",
-                    "default": "github.com/TIBCOSoftware/mashling/flows/ConsoleErrorHandler/flow.json",
-                    "description": "event handler reference"
-                }
-            },
-            "additionalProperties": false
-        },
-        "additionalItems": false
+            ]
+        }
     }
 }

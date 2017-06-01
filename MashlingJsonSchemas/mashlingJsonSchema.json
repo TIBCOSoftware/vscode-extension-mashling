@@ -40,14 +40,7 @@
                             "$ref": "triggersSchema.json#/triggers"
                         },
                         "event_handlers": {
-                            "oneOf": [
-                                {
-                                    "$ref": "eventhandlersSchema.json#/event_handlers_with_inline_actions"
-                                },
-                                {
-                                    "$ref": "eventhandlersSchema.json#/event_handlers_with_reference_for_actions"
-                                }
-                            ]
+                            "$ref": "eventhandlersSchema.json#/event_handlers"
                         },
                         "event_links": {
                             "$ref": "eventlinksSchema.json#/event_links"
@@ -146,14 +139,7 @@
                             "$ref": "triggersSchema.json#/triggers"
                         },
                         "event_handlers": {
-                            "anyOf": [
-                                {
-                                    "$ref": "eventhandlersSchema.json#/event_handlers_with_inline_actions"
-                                },
-                                {
-                                    "$ref": "eventhandlersSchema.json#/event_handlers_with_reference_for_actions"
-                                }
-                            ]
+                            "$ref": "eventhandlersSchema.json#/event_handlers"
                         },
                         "event_links": {
                             "$ref": "eventlinksSchema.json#/event_links"
