@@ -33,7 +33,27 @@ You can install the extension using the VS Code --install-extension command line
 * Once the file is downloaded run the command :
     code --install-extension mashling-yaml-validation-0.0.1.vsix
 
-* Alternatively You can manually install a VS Code extension packaged in a .vsix file. Using the Install from VSIX... command in the Extensions View command drop-down, or the Extensions: Install from VSIX... command in the Command Palette, point to the .vsix file. 
+* Alternatively You can manually install a VS Code extension packaged in a .vsix file. Using the Install from VSIX... command in the Extensions View command drop-down, or the Extensions: Install from VSIX... command in the Command Palette, point to the .vsix file.
+
+* For Yaml support external schema url should be added in .vscode/settings.json file.
+
+* In vscode/settings.json, add following lines of code :
+
+**.vscode/settings.json**
+
+    "json.schemas": [
+       {
+          "fileMatch": [ "mashling.yaml","mashling.eyaml","mashling.yml","mashling.eyml" ],
+          "url": "./yamlSchema.json"
+       }
+    ]
+
+Here url should point to relative path to the schema in current directory. 
+Schema for Yaml is present in the following path: client/MashlingJsonSchemas/yamlSchema.json. 
+Download the schema and add it into the current directory.
+
+
+* 
 ```
 
 ## Known Issues
