@@ -1,0 +1,60 @@
+{
+    "event_links": {
+        "type": "array",
+        "description": "Application triggers",
+        "items": {
+            "type": "object",
+            "description": "event links Object",
+            "required": ["trigger", "success_paths"],
+            "default": {
+                "trigger": "rest_trigger",
+                "success_paths": [
+                    {
+                        "handler": "get_pet_success_handler"
+                    }
+                ]
+            },
+            "properties": {
+                "trigger": {
+                    "type": "string",
+                    "description": "event-links triggers",
+                    "default": ""
+                },
+                "success-paths": {
+                    "type": "array",
+                    "description": "event-links success path",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "condition": {
+                                "type": "string",
+                                "default": "${trigger.content.Country == \"USA\"}"
+                            },
+                            "handler": {
+                                "type": "string",
+                                "default": "SuccessHandler"
+                            }
+                        }
+                    }
+                },
+                "error-paths": {
+                    "type": "array",
+                    "description": "event-links error path",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "condition": {
+                                "type": "string",
+                                "default": ""
+                            },
+                            "handler": {
+                                "type": "string",
+                                "default": "ErrorHandler"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

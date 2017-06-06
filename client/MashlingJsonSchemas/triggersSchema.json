@@ -1,0 +1,70 @@
+{
+    "triggers": {
+        "type": "array",
+        "description": "Application triggers",
+        "items": {
+            "type": "object",
+            "description": "triggers Object",
+            "required": ["name", "type", "settings"],
+            "default": {
+				"name": "rest_trigger",
+				"description": "The trigger on 'pets' endpoint",
+				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
+				"settings": {
+					"port": "9096",
+					"method": "GET",
+					"path": "/pets/:petId"
+				}
+			},
+            "properties": {
+                "name": {
+                    "default": "",
+                    "description": "kafkaConfig",
+                    "type": "string"
+                },
+                "type": {
+                    "default": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkaConsumer",
+                    "description": "version number",
+                    "type": "string"
+                },
+                "description": {
+                    "default": "The trigger on 'orders' topic",
+                    "description": "Configuration for kafka cluster",
+                    "type": "string"
+                },
+                "settings": {
+                    "type": "object",
+                    "description": "input object",
+                    "properties": {
+                        "port": {
+                            "type": "string",
+                            "default": "9096",
+                            "description": "port"
+                        },
+                        "method": {
+                            "type": "string",
+                            "default": "GET",
+                            "description": "Password description"
+                        },
+                        "path": {
+                            "type": "string",
+                            "default": "/v1/mg/users/:userId",
+                            "description": "Password description"
+                        },
+                        "topic": {
+                            "type": "string",
+                            "default": "orders",
+                            "description": "Password description"
+                        },
+                        "config": {
+                            "type": "string",
+                            "default": "${}",
+                            "description": "Config"
+                        }
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

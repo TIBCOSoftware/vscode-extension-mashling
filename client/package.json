@@ -1,0 +1,93 @@
+{
+	"name": "vscode-mashling-extension",
+	"description": "Mashling json and yaml server client.",
+	"version": "0.0.1",
+	"publisher": "tbhatia",
+	"repository": {
+		"url": "https://github.com/TIBCOSoftware/mashling-vscode-extension"
+	},
+	"engines": {
+		"vscode": "^1.8.0"
+	},
+	"categories": [
+		"Languages"
+	],
+	"activationEvents": [
+		"onLanguage:yaml",
+		"onLanguage:json",
+		"onCommand:mashling.createSampleGateway",
+		"onCommand:mashling.createGatewayUsingGatewayDescriptor",
+		"onCommand:mashling.installMashling",
+		"onCommand:mashling.updateMashling"
+	],
+	"main": "./out/src/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "mashling.createSampleGateway",
+				"title": "Create Sample Gateway",
+				"category": "Mashling"
+			},
+			{
+				"command": "mashling.createGatewayUsingGatewayDescriptor",
+				"title": "Create Gateway using gateway descriptor",
+				"category": "Mashling"
+			},
+			{
+				"command": "mashling.installMashling",
+				"title": "Install Mashling",
+				"category": "Mashling"
+			},
+			{
+				"command": "mashling.updateMashling",
+				"title": "Update Mashling",
+				"category": "Mashling"
+			}
+		],
+		"configurationDefaults": {
+			"[yaml]": {
+				"editor.wordBasedSuggestions": false
+				
+			}
+		},
+		"configuration": {
+			"type": "object",
+			"title": "YAML validation configuration",
+			"properties": {
+				"yaml.maxValidationIssues": {
+					"type": "number",
+					"default": 100,
+					"description": "Controls the maximum number of problems produced by the server."
+				}
+			}
+		},
+		"jsonValidation": [
+			{
+				"fileMatch": "mashling.json",
+				"url": "./MashlingJsonSchemas/mashlingJsonSchema.json"
+			}
+		],
+		"snippets": [
+			{
+				"language":"yaml",
+				"path": "./snippets/yaml.json."
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"update-vscode": "node ./node_modules/vscode/bin/install",
+		"compile": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"typescript": "^2.0.3",
+		"vscode": "^1.0.3",
+		"mocha": "^2.3.3",
+		"@types/node": "^6.0.40",
+		"@types/mocha": "^2.2.32"
+	},
+	"dependencies": {
+		"vscode-languageclient": "^1.4.2"
+	}
+}

@@ -1,0 +1,105 @@
+{
+	// Place your snippets for YAML here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	"gateway":{
+		"prefix": "gateway",
+		"body": [
+			"gateway: ",
+			"  name: microgateway",
+			"  version: 1.0.0",
+			"  description: Configuration for kafka cluster",
+			"  configurations: ",
+			"  - name: kafkaConfig",
+			"    type: github.com/TIBCOSoftware/flogo-contrib/config/kafkaConfig",
+			"    description: Configuration for kafka cluster",
+			"    settings:",
+			"      brokers:",
+			"      - localhost:9092",
+			"      - localhost:9093",
+			"      userName: admin",
+			"      password: admin",
+			"  triggers:",
+			"  - name: OrdersTrigger",
+			"    type: github.com/TIBCOSoftware/flogo-contrib/trigger/kafkaConsumer",
+			"    description: The trigger on 'orders' topic",
+			"    settings:",
+			"      topic: orders",
+			"      config: \"${configurations.kafkaConfig}\""
+		]
+	},
+	"name":{
+		"prefix": "name",
+		"body": [
+			"name: microgateway"
+		],
+		"description": "name snippet"
+
+	},
+	"version":{
+		"prefix": "version",
+		"body": [
+			"version: 1.0.0"
+		],
+		"description": "version snippet"
+
+	},
+	"description":{
+		"prefix": "description",
+		"body": [
+			"description: This is the first microgateway app"
+		],
+		"description": "description"
+
+	},
+	"Configurations": {
+		"prefix": "Configurations",
+		"body": [
+			"configurations:",
+			"- name: kafkaConfig",
+			"  type: github.com/TIBCOSoftware/flogo-contrib/config/kafkaConfig",
+			"  description: Configuration for kafka cluster",
+			"  settings:",
+			"    brokers:",
+			"    - localhost:9092",
+			"    - localhost:9093",
+			"    userName: admin",
+			"    password: admin"
+		],
+		"description": "Configuration"
+	},
+	"triggers": {
+		"prefix": "triggers",
+		"body": [
+			"triggers:",
+			"- name: OrdersTrigger",
+			"  type: github.com/TIBCOSoftware/flogo-contrib/trigger/kafkaConsumer",
+			"  description: The trigger on 'orders' topic",
+			"  settings:",
+			"    topic: orders",
+			"    config: \"${configurations.kafkaConfig}\""
+		],
+		"description": "triggers"
+	},
+	"event_handlers": {
+		"prefix": "event_handlers",
+		"body": [
+			"event_handlers:",
+			"- name: OrderSuccessHandler",
+			"  description: Handle the order processing",
+			"  params:",
+			"    time-span: minute",
+			"    message: \"${trigger.content}\"",
+			"    limit: 1001",
+			"  reference: github.com/TIBCOSoftware/mashling/flows/OrdersSuccessHandler/flow.json",
+			"- name: OrderErrorHandler",
+			"  description: Handle the order error processing",
+			"  params:",
+			"    message: \"${trigger.content}\"",
+			"  reference: github.com/TIBCOSoftware/mashling/flows/ConsoleErrorHandler/flow.json"
+		],
+		"description": "event_handlers"
+	}
+}
