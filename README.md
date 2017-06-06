@@ -13,8 +13,14 @@ Project Mashling VSCode Extension
 * __Json validation__ : Validates the json against predefined schema.
 
 * __Create mashling gateway__ : Once the json is ready , mashling gateway can be created directly through vscode command palette.
-Press `Ctrl + shift + p` and run the command named `mashling : create gateway`.
 
+* __Create sample gateway__ : A sample mashling gateway can be created directly through vscode command palette.
+
+* __Install and update mashling-cli__ : Install or update mashling just by running a vscode command.
+
+Press `Ctrl + shift + p` and search for the commands starting with `Mashling`. Following commands are available:
+
+![mashling-command-list.png](extras/mashling-command-list.png?raw=true)
 
 ## Installing the extension
 
@@ -22,6 +28,7 @@ You can install the extension using the VS Code --install-extension command line
 ```
 code --install-extension mashling-support-0.0.1.vsix
 ```
+Alternatively You can manually install a VS Code extension packaged in a .vsix file. Using the Install from VSIX... command in the Extensions View command drop-down, or the Extensions: Install from VSIX... command in the Command Palette, point to the .vsix file.
 
 ## Known Issues
 
