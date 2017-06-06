@@ -2,7 +2,6 @@
     "title": "JSON schema for Mashling config file",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
-    "default": "gateway: ",
     "properties": {
         "gateway": {
             "type": "object",
