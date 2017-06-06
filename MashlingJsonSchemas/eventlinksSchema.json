@@ -20,7 +20,7 @@
                     "description": "event-links triggers",
                     "default": ""
                 },
-                "success-paths": {
+                "success_paths": {
                     "type": "array",
                     "description": "event-links success path",
                     "items": {
@@ -37,7 +37,7 @@
                         }
                     }
                 },
-                "error-paths": {
+                "error_paths": {
                     "type": "array",
                     "description": "event-links error path",
                     "items": {
