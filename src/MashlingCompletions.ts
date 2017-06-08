@@ -3,25 +3,23 @@ import { suggestionsObject } from './MashlingCompletionDefinitions';
 import { CompletionItemKind } from 'vscode';
 import { removeQuotesfromString, removeWhiteSpacesfromString } from './utils';
 
-export class MashlingCompletionItemProvider implements vscode.CompletionItemProvider{
-    public provideCompletionItems(
-        document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken):
-        Thenable<vscode.CompletionItem[]> {
-			// return suggestionsObject;
-            return GetCompletionsInfo(document, position).then(completionInfo => {
-				return completionInfo;
-		    }, () => {
+export class MashlingCompletionItemProvider implements vscode.CompletionItemProvider {
+	public provideCompletionItems(
+		document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken):
+		Thenable<vscode.CompletionItem[]> {
+		return GetCompletionsInfo(document, position).then(completionInfo => {
+			return completionInfo;
+		}, () => {
 			return null;
 		});
-   	 }
+	}
 }
 
 export function GetCompletionsInfo(document: vscode.TextDocument, position: vscode.Position): Promise<vscode.CompletionItem[]> {
-    let wordRange = document.getWordRangeAtPosition(position);
+	let wordRange = document.getWordRangeAtPosition(position);
 	let lineText = document.lineAt(position.line).text;
 	let filteredSuggestions;
-	if(lineText.indexOf(':') == -1){
-		// filteredSuggestions = suggestionsObject.filter(n=>n.kind == CompletionItemKind.Property);
+	if (lineText.indexOf(':') == -1) {
 	} else {
 		let propertyName = removeQuotesfromString(lineText.split(':')[0]);
 		propertyName = removeWhiteSpacesfromString(propertyName);
