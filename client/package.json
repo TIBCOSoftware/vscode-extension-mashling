@@ -10,7 +10,8 @@
 		"vscode": "^1.8.0"
 	},
 	"categories": [
-		"Languages"
+		"Languages",
+		"Snippets"
 	],
 	"activationEvents": [
 		"onLanguage:yaml",
@@ -69,8 +70,8 @@
 		],
 		"snippets": [
 			{
-				"language":"yaml",
-				"path": "./snippets/yaml.json."
+				"language": "yaml",
+				"path": "./snippets/yaml.json"
 			}
 		]
 	},

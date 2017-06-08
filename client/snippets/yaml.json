@@ -4,81 +4,104 @@
 	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
 	// same ids are connected.
 	// Example:
-	"gateway":{
-		"prefix": "gateway",
+	"gateway": {
+		"prefix": "Gateway",
 		"body": [
 			"gateway: ",
-			"  name: microgateway",
-			"  version: 1.0.0",
-			"  description: Configuration for kafka cluster",
+			"  name: ${microgateway}",
+			"  version: ${1.0.0}",
+			"  description: ${gateway description}",
 			"  configurations: ",
-			"  - name: kafkaConfig",
-			"    type: github.com/TIBCOSoftware/flogo-contrib/config/kafkaConfig",
-			"    description: Configuration for kafka cluster",
+			"  - name: ${kafkaConfig}",
+			"    type: ${github.com/TIBCOSoftware/flogo-contrib/config/kafkaConfig}",
+			"    description: ${Configuration for kafka cluster}",
 			"    settings:",
 			"      brokers:",
 			"      - localhost:9092",
 			"      - localhost:9093",
-			"      userName: admin",
-			"      password: admin",
+			"      userName: ${admin}",
+			"      password: ${admin}",
 			"  triggers:",
-			"  - name: OrdersTrigger",
-			"    type: github.com/TIBCOSoftware/flogo-contrib/trigger/kafkaConsumer",
-			"    description: The trigger on 'orders' topic",
+			"  - name: ${OrdersTrigger}",
+			"    type: ${github.com/TIBCOSoftware/flogo-contrib/trigger/kafkaConsumer}",
+			"    description: ${The trigger on 'orders' topic}",
 			"    settings:",
-			"      topic: orders",
-			"      config: \"${configurations.kafkaConfig}\""
-		]
+			"      topic: ${orders}",
+			"      config: ${\"${configurations.kafkaConfig}\"}",
+			"  event_handlers:",
+			"  - name: ${OrderSuccessHandler}",
+			"    description: ${Handle the order processing}",
+			"    params:",
+			"      time-span: ${minute}",
+			"      message: ${\"${trigger.content}\"}",
+			"      limit: ${1001}",
+			"    reference: ${github.com/TIBCOSoftware/mashling/flows/OrdersSuccessHandler/flow.json}",
+			"  - name: ${OrderErrorHandler}",
+			"    description: ${Handle the order error processing}",
+			"    reference: ${github.com/TIBCOSoftware/mashling/flows/ConsoleErrorHandler/flow.json}",
+			"    params:",
+			"      message: ${\"${trigger.content}\"}",
+			"    actions:",
+			"  event_links:",
+			"  - trigger: ${OrdersTrigger}",
+			"    success_paths:",
+			"    - if: ${trigger.content.Country == \"USA\"}",
+			"    handler: ${OrderSuccessHandler}",
+			"    error_paths:",
+			"    - if: ${\"${trigger.content.Country == undefined}\"}",
+			"    handler: ${OrderErrorHandler}"
+		],
+		"description": "Sample Gateway model"
 	},
 	"name":{
 		"prefix": "name",
 		"body": [
-			"name: microgateway"
+			"name: ${microgateway}"
 		],
-		"description": "name snippet"
+		"description": "Gateway name"
 
 	},
 	"version":{
 		"prefix": "version",
 		"body": [
-			"version: 1.0.0"
+			"version: ${1.0.0}"
 		],
-		"description": "version snippet"
+		"description": "Gateway version"
 
 	},
 	"description":{
 		"prefix": "description",
 		"body": [
-			"description: This is the first microgateway app"
+			"description: ${This is the first microgateway app}"
 		],
-		"description": "description"
+		"description": "Gateway description"
 
 	},
 	"Configurations": {
 		"prefix": "Configurations",
 		"body": [
 			"configurations:",
-			"- name: kafkaConfig",
-			"  type: github.com/TIBCOSoftware/flogo-contrib/config/kafkaConfig",
-			"  description: Configuration for kafka cluster",
+			"- name: ${kafkaConfig}",
+			"  type: ${github.com/TIBCOSoftware/flogo-contrib/config/kafkaConfig}",
+			"  description: ${Configuration for kafka cluster}",
 			"  settings:",
 			"    brokers:",
 			"    - localhost:9092",
 			"    - localhost:9093",
-			"    userName: admin",
-			"    password: admin"
+			"    userName: ${admin}",
+			"    password: ${admin}"
 		],
-		"description": "Configuration"
+		"description": "Gateway Configuration object"
 	},
 	"triggers": {
 		"prefix": "triggers",
 		"body": [
 			"triggers:",
-			"- name: OrdersTrigger",
-			"  type: github.com/TIBCOSoftware/flogo-contrib/trigger/kafkaConsumer",
-			"  description: The trigger on 'orders' topic",
+			"- name: ${OrdersTrigger}",
+			"  type: ${github.com/TIBCOSoftware/flogo-contrib/trigger/kafkaConsumer}",
+			"  description: ${The trigger on 'orders' topic}",
 			"  settings:",
-			"    topic: orders",
+			"    topic: ${orders}",
 			"    config: \"${configurations.kafkaConfig}\""
 		],
 		"description": "triggers"
@@ -87,18 +110,35 @@
 		"prefix": "event_handlers",
 		"body": [
 			"event_handlers:",
-			"- name: OrderSuccessHandler",
-			"  description: Handle the order processing",
+			"- name: ${OrderSuccessHandler}",
+			"  description: ${Handle the order processing}",
 			"  params:",
-			"    time-span: minute",
+			"    time-span: ${minute}",
 			"    message: \"${trigger.content}\"",
-			"    limit: 1001",
-			"  reference: github.com/TIBCOSoftware/mashling/flows/OrdersSuccessHandler/flow.json",
-			"- name: OrderErrorHandler",
-			"  description: Handle the order error processing",
+			"    limit: ${1001}",
+			"  reference: ${github.com/TIBCOSoftware/mashling/flows/OrdersSuccessHandler/flow.json}",
+			"- name: ${OrderErrorHandler}",
+			"  description: ${Handle the order error processing}",
+			"  reference: ${github.com/TIBCOSoftware/mashling/flows/ConsoleErrorHandler/flow.json}",
 			"  params:",
 			"    message: \"${trigger.content}\"",
-			"  reference: github.com/TIBCOSoftware/mashling/flows/ConsoleErrorHandler/flow.json"
+			"  actions:"
+			
+		],
+		"description": "event_handlers"
+	},
+	"event_links": {
+		"prefix": "event_links",
+		"body": [
+			"event_links:",
+			"- trigger: ${OrdersTrigger}",
+			"  success_paths:",
+			"  - if: ${trigger.content.Country == \"USA\"}",
+			"    handler: OrderSuccessHandler",
+			"  error_paths:",
+			"  - if: ${trigger.content.Country == undefined}",
+			"    handler: OrderErrorHandler"
+			
 		],
 		"description": "event_handlers"
 	}
