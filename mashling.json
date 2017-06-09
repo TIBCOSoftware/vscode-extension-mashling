@@ -1,0 +1,54 @@
+{
+	"gateway": {
+		"name": "demoapp",
+		"configurations": [
+			{
+				"name": "rest_trigger",
+				"description": "The trigger on 'pets' endpoint",
+				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
+				"settings": {
+					"port": "9096",
+					"method": "GET",
+					"path": "/pets/:petId",
+					"brokers":"localhost:9092",
+					"password": "admin"
+				}
+			}
+		],
+		"triggers": [
+			{
+				"name": "rest_trigger",
+				"description": "The trigger on 'pets' endpoint",
+				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
+				"settings": {
+					"port": "9096",
+					"method": "GET",
+					"path": "/pets/:petId"
+				}
+			}
+		],
+		"description": "My Mashling application description",
+		"event_handlers":[
+			{
+				"name": "get_pet_success_handler",
+				"description": "Handle the pet access",
+				"definition": {},
+				"params": {
+					"uri": "petstore.swagger.io/v2/pet/3"
+				}
+			},
+			{
+				"name": "get_pet_success_handler",
+				"description": "Handle the pet access",
+				"definition": {},
+				"params": {
+					"uri": "petstore.swagger.io/v2/pet/3"
+				}
+			}
+		],
+		"event_links": [
+			
+		],
+		"version": "1.0.0"
+	}
+}
