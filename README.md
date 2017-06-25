@@ -22,7 +22,7 @@ Project Mashling VSCode Extension
 
 Press `Ctrl + shift + p` and search for the commands starting with `Mashling`. Following commands are available:
 
-![mashling-command-list.png](xtras/mashling-command-list.png?raw=true)
+![mashling-command-list.png](extras/mashling-command-list.png?raw=true)
 
 ## Installing the extension
 

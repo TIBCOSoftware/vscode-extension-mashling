@@ -8,7 +8,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import { workspace, languages, ExtensionContext, extensions, Uri } from 'vscode';
 import { MASHLING_MODE } from './MashlingMode';
-// import { GetHoverInfo, MashlingHoverProvider } from './MashlingHover';
+import { GetHoverInfo, MashlingHoverProvider } from './MashlingHover';
 import { MashlingCompletionItemProvider } from './MashlingCompletions';
 import { LanguageClient, LanguageClientOptions, SettingMonitor, RequestType, ServerOptions, TransportKind, NotificationType } from 'vscode-languageclient';
 // import TelemetryReporter from 'vscode-extension-telemetry';
@@ -64,8 +64,8 @@ export function activate(context: ExtensionContext) {
 			documentSelector: ['yaml'],
 			synchronize: {
 				configurationSection: ['json.schemas', 'http.proxy', 'http.proxyStrictSSL', 'languageServerYamlSchema'],
-				fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
-				// fileEvents: workspace.createFileSystemWatcher('**/.yaml')
+				// fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
+				fileEvents: workspace.createFileSystemWatcher('**/.yaml')
 			},
 			initializationOptions: {
 				languageIds
@@ -84,6 +84,7 @@ export function activate(context: ExtensionContext) {
 		client.onRequest(VSCodeContentRequest.type, (uriPath: string) => {
 			let uri = Uri.parse(uriPath);
 			return workspace.openTextDocument(uri).then(doc => {
+				console.log(doc.getText());
 				return doc.getText();
 			}, error => {
 				return Promise.reject(error);
@@ -110,10 +111,16 @@ export function activate(context: ExtensionContext) {
 		});
 	});
 
-	//Register all the commands
+	/**********************************************************************************************************/
+	/* Changes to automate configuration update in settings.json file--INCOMPLETE */
 
-	registerCommands();
-	
+	// let uri = workspace.rootPath + "\\.vscode\\settings.json";
+	// // console.log(workspace.textDocuments);
+	// workspace.openTextDocument(uri).then(doc => {
+	// 	console.log(doc.getText());
+	// })
+	/*********************************************************************************************************/
+
 	function registerCommands() {
 
 		var disposable = vscode.commands.registerCommand('mashling.createSampleGateway', function () {
@@ -136,8 +143,8 @@ export function activate(context: ExtensionContext) {
 		context.subscriptions.push(disposable);
 	}
 
-	// context.subscriptions.push(vscode.languages.registerHoverProvider(MASHLING_MODE, new MashlingHoverProvider()));
-	context.subscriptions.push(vscode.languages.registerCompletionItemProvider(MASHLING_MODE, new MashlingCompletionItemProvider(), ':', '\"'));
+	context.subscriptions.push(vscode.languages.registerHoverProvider(MASHLING_MODE, new MashlingHoverProvider()));
+	context.subscriptions.push(vscode.languages.registerCompletionItemProvider(MASHLING_MODE, new MashlingCompletionItemProvider(), ':'));
 }
 
 function createSampleGateway() {
