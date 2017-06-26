@@ -5,51 +5,38 @@
         "items": {
             "type": "object",
             "description": "event links Object",
-            "required": ["trigger", "success_paths"],
+            "required": [
+                "triggers",
+                "dispatches"
+            ],
             "default": {
                 "trigger": "rest_trigger",
-                "success_paths": [
+                "dispatches": [
                     {
+                        "if":"${}",
                         "handler": "get_pet_success_handler"
                     }
                 ]
             },
             "properties": {
-                "trigger": {
+                "triggers": {
                     "type": "string",
                     "description": "event-links triggers",
                     "default": ""
                 },
-                "success_paths": {
+                "dispatches": {
                     "type": "array",
                     "description": "event-links success path",
                     "items": {
                         "type": "object",
                         "properties": {
-                            "condition": {
+                            "if": {
                                 "type": "string",
-                                "default": "${trigger.content.Country == \"USA\"}"
+                                "default": "${trigger == \"\"}"
                             },
                             "handler": {
                                 "type": "string",
                                 "default": "SuccessHandler"
-                            }
-                        }
-                    }
-                },
-                "error_paths": {
-                    "type": "array",
-                    "description": "event-links error path",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "condition": {
-                                "type": "string",
-                                "default": ""
-                            },
-                            "handler": {
-                                "type": "string",
-                                "default": "ErrorHandler"
                             }
                         }
                     }

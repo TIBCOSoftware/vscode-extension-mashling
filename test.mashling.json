@@ -1,0 +1,48 @@
+{
+    "gateway": {
+        "name": "demoapp",
+        "configurations": [
+            {
+                "name": "kafkaConfig",
+                "type": "github.com/wnichols/kafkasub",
+                "description": "Configuration for kafka cluster",
+                "settings": {
+                    "BrokerUrl": "localhost:9092",
+                    "username": "",
+                    "password": ""
+                }
+            }
+        ],
+        "event_handlers": [
+            {
+                "name": "get_pet_success_handler",
+                "description": "Handle the pet access",
+                "reference": "github.com/TIBCOSoftware/mashling-lib/flow/flogo.json",
+                "params": {
+                    "uri": "petstore.swagger.io/v2/pet/3"
+                }
+            }
+        ],
+        "event_links": [
+            {
+                "trigger": "rest_trigger",
+                "dispatches": [
+                    {
+                        "if": "${}",
+                        "handler": "get_pet_success_handler"
+                    }
+                ]
+            }
+        ],
+        "description": "My Mashling application description",
+        "triggers": [
+            {
+                "name": "rest_trigger",
+                "description": "The trigger on 'pets' endpoint",
+                "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
+                "settings": {}
+            }
+        ],
+        "version": "1.0.0"
+    }
+}
