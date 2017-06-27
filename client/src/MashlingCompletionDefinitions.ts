@@ -74,6 +74,30 @@ export const suggestionsObject:CompletionItem[] = [
 		filterText: 'configurations'
 	},
 	{
+		label: 'BrokerUrl',
+		kind: CompletionItemKind.Property,
+		detail: "configuration settings BrokerUrl",
+		insertText: 'BrokerUrl:localhost:9092\n  ',
+		documentation: 'configuration settings BrokerUrl',
+		filterText: 'configurations>settings'
+	},
+	{
+		label: 'username',
+		kind: CompletionItemKind.Property,
+		detail: "configuration settings username",
+		insertText: 'username:\n  ',
+		documentation: 'configuration settings username',
+		filterText: 'configurations>settings'
+	},
+	{
+		label: 'password',
+		kind: CompletionItemKind.Property,
+		detail: "configuration settings password",
+		insertText: 'password:\n  ',
+		documentation: 'configuration settings password',
+		filterText: 'configurations>settings'
+	},
+	{
 		label: 'triggers',
 		kind: CompletionItemKind.Property,
 		detail: "triggers",
@@ -122,28 +146,36 @@ export const suggestionsObject:CompletionItem[] = [
 		filterText: '1'
 	},
 	{
-		label: 'trigger',
+		label: 'triggers',
 		kind: CompletionItemKind.Property,
-		detail: "event_links trigger",
-		insertText: 'trigger: OrdersTrigger\n',
-		documentation: 'event_links trigger',
+		detail: "event_links triggers",
+		insertText: 'triggers: OrdersTrigger\n',
+		documentation: 'event_links triggers',
 		filterText: 'event_links'
 	},
 	{
-		label: 'success_paths',
+		label: 'dispatches',
 		kind: CompletionItemKind.Property,
-		detail: "event_links success_paths",
-		insertText: 'success_paths:\n- ',
-		documentation: 'event_links success_paths',
+		detail: "event_links dispatches",
+		insertText: 'dispatches:\n- ',
+		documentation: 'event_links dispatches',
 		filterText: 'event_links'
 	},
 	{
-		label: 'error_paths',
+		label: 'if',
 		kind: CompletionItemKind.Property,
-		detail: "event_links error_paths",
-		insertText: 'error_paths:\n- ',
-		documentation: 'event_links error_paths',
-		filterText: 'event_links'
+		detail: "dispatches if condition",
+		insertText: 'if:\n ',
+		documentation: 'dispatches if condition',
+		filterText: 'event_links>dispatches'
+	},
+	{
+		label: 'handler',
+		kind: CompletionItemKind.Property,
+		detail: "dispatches handler",
+		insertText: 'handler:\n ',
+		documentation: 'dispatches handler',
+		filterText: 'event_links>dispatches'
 	},
 	{
 		label: 'event_handlers',

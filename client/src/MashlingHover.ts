@@ -10,7 +10,6 @@ export interface MashlingDefinitionInformation {
 export class MashlingHoverProvider implements HoverProvider {
 
 	public provideHover(document: TextDocument, position: Position, token: CancellationToken): Thenable<Hover> {
-		console.log("Inside Hover provider");
 		return GetHoverInfo(document, position).then(definitionInfo => {
 			let hoverTexts: MarkedString[] = [];
 			if (definitionInfo.info){

@@ -56,15 +56,23 @@ function computePropertyIndentation(doc: vscode.TextDocument, pos: vscode.Positi
 			level = computePropertyLevel(previousLineText.search(/\S|$/));
 		}
 		else if (lineText.search(/\S|$/) == lineText.length && lineText.length == 2) {
-			level = computePropertyLevel(lineText.search(/\S|$/));
+			level = computePropertyLevel(2);
 			let previousProperties = getAllPropertiesAtLevel1(doc);
 			return suggestionsObject.filter(n => parseInt(n.filterText) == level && n.kind == 9 && previousProperties.indexOf(n.label) == -1);
 		}
 		else if (lineText.match(/[ -]+/i)[0].length === lineText.length && lineText.length > 2) {
+			let sequenceStart = lineText.match(/[ -]+/i)[0];
+			level = computePropertyLevel(sequenceStart.length);
 			let parentProperty = getParentProperty(doc, pos.line);
-			console.log("parent property ", parentProperty);
-			let otherPropertiesAtSameLevel = getOtherPropertiesAtSameLevel(doc, pos.line);
-			return suggestionsObject.filter(n => n.filterText == parentProperty && otherPropertiesAtSameLevel.indexOf(n.label) == -1);
+			console.log("parent ", parentProperty);
+			let otherPropertiesAtSameLevel = [];
+			if (sequenceStart.indexOf("-") !== -1) {
+				otherPropertiesAtSameLevel = [];
+				return suggestionsObject.filter(n => n.filterText == parentProperty);
+			} else {
+				otherPropertiesAtSameLevel = getOtherPropertiesAtSameLevel(doc, pos.line);
+				return suggestionsObject.filter(n => n.filterText == parentProperty && otherPropertiesAtSameLevel.indexOf(n.label) == -1);
+			}
 		}
 
 	}
@@ -104,11 +112,16 @@ function getAllPropertiesAtLevel1(doc: vscode.TextDocument): String[] {
 
 function getOtherPropertiesAtSameLevel(doc: vscode.TextDocument, lineNumber): String[] {
 	var res = [];
-	let currentPropertylevel = computePropertyLevel(textAtLine(doc, lineNumber).match(/[ -]+/i)[0].length);
+	let lineTextAtStart = textAtLine(doc, lineNumber).match(/[ -]+/i)[0];
+	let currentPropertylevel = computePropertyLevel(lineTextAtStart.length);
 	//Check for previous properties at same level
 	let newPrevLevel = currentPropertylevel;
 	let i = lineNumber - 1;
 	while (newPrevLevel >= currentPropertylevel) {
+		if(textAtLine(doc, i).match(/[ -]+/i)[0].indexOf("-") == textAtLine(doc, i).match(/[ -]+/i)[0].length - 2){
+			res.push(textAtLine(doc, i).match(/[^ -]+/i)[0].split(":")[0]);
+			break;
+		}
 		if (newPrevLevel == currentPropertylevel) {
 			res.push(textAtLine(doc, i).match(/[^ -]+/i)[0].split(":")[0]);
 		}
@@ -136,9 +149,17 @@ function getParentProperty(doc: vscode.TextDocument, lineNumber): String {
 	let currentPropertylevel = computePropertyLevel(textAtLine(doc, lineNumber).match(/[ -]+/i)[0].length);
 	let newLevel = currentPropertylevel;
 	let i = lineNumber;
+	let parents = [];
 	while (newLevel >= currentPropertylevel) {
 		newLevel = computePropertyLevel(textAtLine(doc, i - 1).match(/[ -]+/i)[0].length);
 		i--;
 	}
+	// while (newLevel >= 1) {
+	// 	newLevel = computePropertyLevel(textAtLine(doc, i - 1).match(/[ -]+/i)[0].length);
+	// 	if(newLevel !== currentPropertylevel){
+	// 		parents.push(textAtLine(doc, i).match(/[^ -]+/i)[0].split(":")[0]);
+	// 	}
+	// 	i--;
+	// }
 	return textAtLine(doc, i).match(/[^ -]+/i)[0].split(":")[0];
 };
