@@ -10,7 +10,7 @@
                 "dispatches"
             ],
             "default": {
-                "trigger": "rest_trigger",
+                "triggers": "rest_trigger",
                 "dispatches": [
                     {
                         "if":"${}",
