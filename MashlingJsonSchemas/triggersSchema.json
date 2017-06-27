@@ -11,9 +11,7 @@
 				"description": "The trigger on 'pets' endpoint",
 				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
 				"settings": {
-					"port": "9096",
-					"method": "GET",
-					"path": "/pets/:petId"
+					
 				}
 			},
             "properties": {
@@ -35,32 +33,8 @@
                 "settings": {
                     "type": "object",
                     "description": "input object",
-                    "properties": {
-                        "port": {
-                            "type": "string",
-                            "default": "9096",
-                            "description": "port"
-                        },
-                        "method": {
-                            "type": "string",
-                            "default": "GET",
-                            "description": "Password description"
-                        },
-                        "path": {
-                            "type": "string",
-                            "default": "/v1/mg/users/:userId",
-                            "description": "Password description"
-                        },
-                        "topic": {
-                            "type": "string",
-                            "default": "orders",
-                            "description": "Password description"
-                        },
-                        "config": {
-                            "type": "string",
-                            "default": "${}",
-                            "description": "Config"
-                        }
+                    "default": {
+                       
                     }
                 }
             },
