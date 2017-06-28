@@ -19,29 +19,18 @@ export function GetCompletionsInfo(document: vscode.TextDocument, position: vsco
 	let wordRange = document.getWordRangeAtPosition(position);
 	let lineText = document.lineAt(position.line).text;
 	let filteredSuggestions;
-	filteredSuggestions = computePropertyIndentation(document, position);
-	// if (lineText.indexOf(':') == -1) {
-	// 	filteredSuggestions = suggestionsObject.filter(n => n.kind == 9);
-	// } else {
-	// 	let propertyName = removeQuotesfromString(lineText.split(':')[0]);
-	// 	propertyName = removeWhiteSpacesfromString(propertyName);
-	// 	// console.log("propertyName ", propertyName);
-	// 	filteredSuggestions = suggestionsObject.filter(n => n.label == propertyName);
-	// }
-
+	filteredSuggestions = getSuggestions(document, position);
 	return Promise.resolve(filteredSuggestions);
 }
 
-function computePropertyIndentation(doc: vscode.TextDocument, pos: vscode.Position) {
+function getSuggestions(doc: vscode.TextDocument, pos: vscode.Position) {
 	let level;
 	let lineText = textAtLine(doc, pos.line);
-	console.log("Line number ", pos.line);
 	//Check if first line
 	if (pos.line == 0) {
 		level = 0;
 		return suggestionsObject.filter(n => parseInt(n.detail[0]) == 0);
 	}
-	// console.log("space count ", lineText.search(/\S|$/));
 	//line 2
 	if (pos.line == 1 && lineText.search(/\S|$/) == lineText.length && lineText.length == 2) {
 		level = 1;
@@ -49,22 +38,22 @@ function computePropertyIndentation(doc: vscode.TextDocument, pos: vscode.Positi
 	}
 	//Not first line and empty line
 	if (pos.line > 1) {
-		//compute Level
 		//If empty line
 		if (lineText.length == 0) {
 			let previousLineText = textAtLine(doc, pos.line - 1);
 			level = computePropertyLevel(previousLineText.search(/\S|$/));
 		}
+		//if line contains spaces
 		else if (lineText.search(/\S|$/) == lineText.length && lineText.length == 2) {
-			level = computePropertyLevel(2);
+			level = 1;
 			let previousProperties = getAllPropertiesAtLevel1(doc);
 			return suggestionsObject.filter(n => parseInt(n.filterText) == level && n.kind == 9 && previousProperties.indexOf(n.label) == -1);
 		}
+		//if line contains spacers or scalars
 		else if (lineText.match(/[ -]+/i)[0].length === lineText.length && lineText.length > 2) {
 			let sequenceStart = lineText.match(/[ -]+/i)[0];
 			level = computePropertyLevel(sequenceStart.length);
 			let parentProperty = getParentProperty(doc, pos.line);
-			console.log("parent ", parentProperty);
 			let otherPropertiesAtSameLevel = [];
 			if (sequenceStart.indexOf("-") !== -1) {
 				otherPropertiesAtSameLevel = [];
@@ -129,19 +118,7 @@ function getOtherPropertiesAtSameLevel(doc: vscode.TextDocument, lineNumber): St
 		i--;
 	}
 	//Check for next properties at same level
-	// let newNextLevel = currentPropertylevel;
-	// let j = lineNumber + 1;
-	// while (newNextLevel >= currentPropertylevel) {
-	// 	console.log("while loop 2");
-	// 	console.log("lineText length ", textAtLine(doc, j).length);
-	// 	if (newNextLevel == currentPropertylevel) {
-	// 		res.push(textAtLine(doc, j).match(/[^ -]+/i)[0].split(":")[0]);
-	// 		console.log("res ", res);
-	// 	}
-	// 	newNextLevel = computePropertyLevel(textAtLine(doc, j + 1).match(/[ -]+/i)[0].length);
-	// 	console.log("new next level ", newNextLevel);
-	// 	j++;
-	// }
+	
 	return res;
 }
 
@@ -150,16 +127,13 @@ function getParentProperty(doc: vscode.TextDocument, lineNumber): String {
 	let newLevel = currentPropertylevel;
 	let i = lineNumber;
 	let parents = [];
-	while (newLevel >= currentPropertylevel) {
-		newLevel = computePropertyLevel(textAtLine(doc, i - 1).match(/[ -]+/i)[0].length);
+	while (newLevel > 1) {
+		newLevel = computePropertyLevel(textAtLine(doc, i).match(/[ -]+/i)[0].length);
+		if(newLevel < currentPropertylevel){
+			parents.unshift(textAtLine(doc, i).match(/[^ -]+/i)[0].split(":")[0]);
+			currentPropertylevel = newLevel;
+		}
 		i--;
 	}
-	// while (newLevel >= 1) {
-	// 	newLevel = computePropertyLevel(textAtLine(doc, i - 1).match(/[ -]+/i)[0].length);
-	// 	if(newLevel !== currentPropertylevel){
-	// 		parents.push(textAtLine(doc, i).match(/[^ -]+/i)[0].split(":")[0]);
-	// 	}
-	// 	i--;
-	// }
-	return textAtLine(doc, i).match(/[^ -]+/i)[0].split(":")[0];
+	return parents.join(" ");
 };
