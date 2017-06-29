@@ -54,17 +54,22 @@ export function activate(context: ExtensionContext) {
 
 		let activeDocPath = vscode.window.activeTextEditor.document.uri.path;
 		let openedFileName = path.basename(activeDocPath) //activeDocPath.substring(activeDocPath.lastIndexOf('/') + 1);
-		
-		if (openedFileName.endsWith("mashling.json"))  {
-		//TODO: check if schema of open file is valid
-			// activeDocPath = activeDocPath.substring(1, activeDocPath.lastIndexOf('/'));
-			var activeDirName = path.dirname(activeDocPath) //activeDocPath.split(':')[0] + ':';
-			// terminal.sendText(activeDirName);
+
+		if (openedFileName.endsWith("mashling.json")) {
+			//TODO: check if schema of open file is valid		
+			var winOSFilePathSeparator = "\\";
+			if (path.sep === winOSFilePathSeparator) {
+				var activeDirName = path.dirname(activeDocPath).substring(1);
+				let drivename = activeDirName.split(":")[0];
+				terminal.sendText(drivename + ":");
+			} else {
+				var activeDirName = path.dirname(activeDocPath);
+			}
 			terminal.sendText('cd ' + activeDirName);
 			vscode.window.showInputBox({ prompt: 'Enter the application name' })
 				.then(function (appName) {
 					terminal.show(true);
-					terminal.sendText("mashling create -f "+ openedFileName + " " + appName);
+					terminal.sendText("mashling create -f " + openedFileName + " " + appName);
 					vscode.window.showInformationMessage("Gateway is being created. Refer to command prompt for more info");
 				});
 		} else {
