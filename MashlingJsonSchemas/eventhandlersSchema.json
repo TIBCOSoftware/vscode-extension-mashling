@@ -1,7 +1,7 @@
 {
     "event_handlers": {
         "type": "array",
-        "description": "Application event_handlers",
+        "description": "Gateway Handlers",
         "items": {
             "anyOf": [
                 {
@@ -21,31 +21,25 @@
                     "properties": {
                         "name": {
                             "type": "string",
-                            "default": "",
-                            "description": "event handler name"
+                            "default": "get_pet_success_handler",
+                            "description": "Handler name"
                         },
                         "description": {
                             "type": "string",
-                            "default": "",
-                            "description": "event handler description"
+                            "default": "Handle the pet access",
+                            "description": "Handler description"
                         },
                         "params": {
                             "type": "object",
-                            "description": "event handler input",
+                            "description": "Handler params",
                             "properties": {
-                                "time-span": {
-                                    "type": "string",
-                                    "default": "minute"
-                                },
-                                "message": {
-                                    "type": "string",
-                                    "default": "${}"
-                                },
-                                "limit": {
-                                    "type": "integer",
-                                    "default": 1001
+                                "uri":{
+                                    "type":"string",
+                                    "default":"petstore.swagger.io/v2/pet/3",
+                                    "description":"Handler params uri"
                                 }
-                            }
+                            },
+                            "additionalProperties": { "type": "string" }
                         },
                         "reference": {
                             "type": "string",
@@ -86,76 +80,96 @@
                             "properties": {
                                 "data": {
                                     "type": "object",
+                                    "description":"Handler definition data",
                                     "properties": {
                                         "flow": {
                                             "type": "object",
+                                            "description":"Handler flow",
                                             "properties": {
                                                 "type": {
                                                     "type": "integer",
+                                                    "description":"Handler type",
                                                     "default": 1
                                                 },
                                                 "attributes": {
-                                                    "type": "array"
+                                                    "type": "array",
+                                                    "description":"Handler attributes"
                                                 },
                                                 "rootTask": {
                                                     "type": "object",
+                                                    "description":"Handler rootTask",
                                                     "properties": {
                                                         "id": {
                                                             "type": "integer",
+                                                            "description":"Handler rootTask id",
                                                             "default": 1
                                                         },
                                                         "type": {
                                                             "type": "integer",
+                                                            "description":"Handler rootTask type",
                                                             "default": 1
                                                         },
                                                         "tasks": {
                                                             "type": "array",
+                                                            "description":"Handler rootTask task array",
                                                             "items": {
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "id": {
                                                                         "type": "integer",
-                                                                        "default": 2
+                                                                        "default": 2,
+                                                                        "description":"Handler rootTask task id"
                                                                     },
                                                                     "name": {
                                                                         "type": "string",
-                                                                        "default": "Log Message"
+                                                                        "default": "Log Message",
+                                                                        "description":"Handler rootTask task name"
                                                                     },
                                                                     "description": {
                                                                         "type": "string",
-                                                                        "default": "Simple Log Activity"
+                                                                        "default": "Simple Log Activity",
+                                                                        "description":"Handler rootTask task description"
                                                                     },
                                                                     "type": {
                                                                         "type": "integer",
-                                                                        "default": 1
+                                                                        "default": 1,
+                                                                        "description":"Handler rootTask task type"
                                                                     },
                                                                     "activityType": {
                                                                         "type": "string",
-                                                                        "default": "tibco-log"
+                                                                        "default": "tibco-log",
+                                                                        "description":"Handler rootTask task activity type"
                                                                     },
                                                                     "activityRef": {
                                                                         "type": "string",
-                                                                        "default": "github.com/TIBCOSoftware/flogo-contrib/activity/log"
+                                                                        "default": "github.com/TIBCOSoftware/flogo-contrib/activity/log",
+                                                                        "description":"Handler rootTask task activity reference"
                                                                     },
                                                                     "attributes": {
                                                                         "type": "array",
+                                                                        "description":"Handler rootTask task activity attributes",
                                                                         "items": {
                                                                             "type": "object",
+                                                                            "description":"Handler rootTask task activity attributes object",
                                                                             "properties": {
                                                                                 "name": {
                                                                                     "type": "string",
+                                                                                    "description":"Handler rootTask task activity attributes name",
                                                                                     "default": "message"
                                                                                 },
                                                                                 "value": {
                                                                                     "type": "string",
+                                                                                    "description":"Handler rootTask task activity attributes value",
                                                                                     "default": "${}"
                                                                                 },
                                                                                 "required": {
                                                                                     "type": "boolean",
+                                                                                    "description":"Handler rootTask task activity attributes required property",
                                                                                     "default": false
                                                                                 },
                                                                                 "type": {
                                                                                     "type": "string",
+                                                                                    "description":"Handler rootTask task activity attributes type property",
                                                                                     "default": "string"
                                                                                 }
                                                                             }
@@ -165,10 +179,12 @@
                                                             }
                                                         },
                                                         "links": {
-                                                            "type": "array"
+                                                            "type": "array",
+                                                            "description":"Handler rootTask links"
                                                         },
                                                         "attributes": {
-                                                            "type": "array"
+                                                            "type": "array",
+                                                            "description":"Handler rootTask attributes"
                                                         }
                                                     }
                                                 }
@@ -178,29 +194,24 @@
                                 },
                                 "id": {
                                     "type": "string",
+                                    "description":"Handler definition id",
                                     "default": "order_success_handler"
                                 },
                                 "ref": {
                                     "type": "string",
+                                    "description":"Handler definition ref",
                                     "default": "github.com/TIBCOSoftware/flogo-contrib/action/flow"
                                 }
                             }
                         },
                         "params": {
                             "type": "object",
-                            "description": "event handler input",
+                            "description": "Handler params",
                             "properties": {
-                                "time-span": {
+                                "uri": {
                                     "type": "string",
-                                    "default": "minute"
-                                },
-                                "message": {
-                                    "type": "string",
-                                    "default": "${}"
-                                },
-                                "limit": {
-                                    "type": "integer",
-                                    "default": 1001
+                                    "default": "petstore.swagger.io/v2/pet/3",
+                                    "description":"Handler params uri"
                                 }
                             }
                         }
@@ -208,6 +219,7 @@
                     "additionalProperties": false
                 }
             ]
-        }
+        },
+        "additionalProperties": false
     }
 }
