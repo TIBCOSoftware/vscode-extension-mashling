@@ -1,68 +1,68 @@
 {
     "configurations": {
         "type": "array",
-        "description": "Application configurations",
+        "description": "Gateway Configurations",
         "items": {
             "type": "object",
-            "description": "configurations Object",
-            "required":["name", "type", "settings"],
+            "description": "Configurations Object",
+            "required": [
+                "name",
+                "type",
+                "settings"
+            ],
             "default": {
-				"name": "kafkaConfig",
-				"type": "github.com/wnichols/kafkasub",
-				"description": "Configuration for kafka cluster",
-				"settings": {
-					"BrokerUrl": "localhost:9092"
-				}
-			},
+                "name": "kafkaConfig",
+                "type": "github.com/wnichols/kafkasub",
+                "description": "Configuration for kafka cluster",
+                "settings": {
+                    "BrokerUrl": "localhost:9092",
+                    "username":"abc",
+                    "password":"xyz"
+                }
+            },
             "properties": {
                 "name": {
                     "default": "",
-                    "description": "kafkaConfig",
+                    "description": "Configuration name",
                     "type": "string"
                 },
                 "type": {
                     "default": "github.com/TIBCOSoftware/flogo-contrib/config/kafkaConfig",
-                    "description": "version number",
+                    "description": "Configuration type",
                     "type": "string"
                 },
                 "description": {
                     "default": "Configuration for kafka cluster",
-                    "description": "Configuration for kafka cluster",
+                    "description": "Configuration description",
                     "type": "string"
                 },
                 "settings": {
                     "type": "object",
-                    "description": "Configuration for kafka cluster",
-                    "additionalProperties": { "type": "string" },
+                    "description": "Configuration settings",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
                     "properties": {
-                        "brokers": {
-                            "anyOf": [
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string",
-                                        "default": "localhost:9092"
-                                    }
-                                },
-                                {
-                                    "type": "string",
-                                    "default": "localhost:9092"
-                                }
-                            ]
+                        "BrokerUrl": {
+                            "type": "string",
+                            "default": "localhost:9092",
+                            "description": "Configuration settings BrokerUrl"
                         },
                         "username": {
                             "type": "string",
                             "default": "admin",
-                            "description": "Username description"
+                            "description": "Configuration settings username"
                         },
                         "password": {
                             "type": "string",
                             "default": "admin",
-                            "description": "Password description"
+                            "description": "Configuration settings password"
                         }
                     }
                 }
-            }
-        }
+            },
+            "additionalProperties": false
+        },
+        "additionalProperties": false
     }
 }

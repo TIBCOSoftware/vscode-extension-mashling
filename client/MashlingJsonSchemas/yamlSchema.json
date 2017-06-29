@@ -16,26 +16,26 @@
             ],
             "properties": {
                 "name": {
-                    "description": "My Mashling application name",
-                    "default": "demo-app",
+                    "default": "demoapp",
+                    "description": "Mashling gateway name",
                     "type": "string"
                 },
                 "version": {
-                    "description": "version number",
-                    "type": "string",
-                    "default": "1.0.0"
+                    "default": "1.0.0",
+                    "description": "Mashling gateway version",
+                    "type": "string"
                 },
                 "description": {
-                    "description": "Application description",
-                    "default": "Mashling gateway demoapp",
+                    "default": "My Mashling application description",
+                    "description": "Mashling gateway description",
                     "type": "string"
                 },
                 "configurations": {
                     "type": "array",
-                    "description": "Application configurations",
+                    "description": "Gateway Configurations",
                     "items": {
                         "type": "object",
-                        "description": "configurations Object",
+                        "description": "Configurations Object",
                         "required": [
                             "name",
                             "type",
@@ -46,68 +46,62 @@
                             "type": "github.com/wnichols/kafkasub",
                             "description": "Configuration for kafka cluster",
                             "settings": {
-                                "BrokerUrl": "localhost:9092"
+                                "BrokerUrl": "localhost:9092",
+                                "username": "abc",
+                                "password": "xyz"
                             }
                         },
                         "properties": {
                             "name": {
                                 "default": "",
-                                "description": "kafkaConfig",
+                                "description": "Configuration name",
                                 "type": "string"
                             },
                             "type": {
                                 "default": "github.com/TIBCOSoftware/flogo-contrib/config/kafkaConfig",
-                                "description": "version number",
+                                "description": "Configuration type",
                                 "type": "string"
                             },
                             "description": {
                                 "default": "Configuration for kafka cluster",
-                                "description": "Configuration for kafka cluster",
+                                "description": "Configuration description",
                                 "type": "string"
                             },
                             "settings": {
                                 "type": "object",
-                                "description": "Configuration for kafka cluster",
+                                "description": "Configuration settings",
                                 "additionalProperties": {
                                     "type": "string"
                                 },
                                 "properties": {
-                                    "brokers": {
-                                        "anyOf": [
-                                            {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "string",
-                                                    "default": "localhost:9092"
-                                                }
-                                            },
-                                            {
-                                                "type": "string",
-                                                "default": "localhost:9092"
-                                            }
-                                        ]
+                                    "BrokerUrl": {
+                                        "type": "string",
+                                        "default": "localhost:9092",
+                                        "description": "Configuration settings BrokerUrl"
                                     },
                                     "username": {
                                         "type": "string",
                                         "default": "admin",
-                                        "description": "Username description"
+                                        "description": "Configuration settings username"
                                     },
                                     "password": {
                                         "type": "string",
                                         "default": "admin",
-                                        "description": "Password description"
+                                        "description": "Configuration settings password"
                                     }
                                 }
                             }
-                        }
-                    }
+                        },
+                        "additionalProperties": false
+                    },
+                    "additionalProperties": false
                 },
                 "triggers": {
                     "type": "array",
-                    "description": "Application triggers",
+                    "description": "Gateway Triggers",
                     "items": {
                         "type": "object",
-                        "description": "triggers Object",
+                        "description": "Triggers Object",
                         "required": [
                             "name",
                             "type",
@@ -117,66 +111,37 @@
                             "name": "rest_trigger",
                             "description": "The trigger on 'pets' endpoint",
                             "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
-                            "settings": {
-                                "port": "9096",
-                                "method": "GET",
-                                "path": "/pets/:petId"
-                            }
+                            "settings": {}
                         },
                         "properties": {
                             "name": {
                                 "default": "",
-                                "description": "kafkaConfig",
+                                "description": "Trigger name",
                                 "type": "string"
                             },
                             "type": {
                                 "default": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkaConsumer",
-                                "description": "version number",
+                                "description": "Trigger type",
                                 "type": "string"
                             },
                             "description": {
                                 "default": "The trigger on 'orders' topic",
-                                "description": "Configuration for kafka cluster",
+                                "description": "Trigger description",
                                 "type": "string"
                             },
                             "settings": {
                                 "type": "object",
-                                "description": "input object",
-                                "properties": {
-                                    "port": {
-                                        "type": "string",
-                                        "default": "9096",
-                                        "description": "port"
-                                    },
-                                    "method": {
-                                        "type": "string",
-                                        "default": "GET",
-                                        "description": "Password description"
-                                    },
-                                    "path": {
-                                        "type": "string",
-                                        "default": "/v1/mg/users/:userId",
-                                        "description": "Password description"
-                                    },
-                                    "topic": {
-                                        "type": "string",
-                                        "default": "orders",
-                                        "description": "Password description"
-                                    },
-                                    "config": {
-                                        "type": "string",
-                                        "default": "${}",
-                                        "description": "Config"
-                                    }
-                                }
+                                "description": "Trigger settings",
+                                "default": {}
                             }
                         },
                         "additionalProperties": false
-                    }
+                    },
+                    "additionalProperties": false
                 },
                 "event_handlers": {
                     "type": "array",
-                    "description": "Application event_handlers",
+                    "description": "Gateway Handlers",
                     "items": {
                         "anyOf": [
                             {
@@ -196,30 +161,26 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "default": "",
-                                        "description": "event handler name"
+                                        "default": "get_pet_success_handler",
+                                        "description": "Handler name"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "default": "",
-                                        "description": "event handler description"
+                                        "default": "Handle the pet access",
+                                        "description": "Handler description"
                                     },
                                     "params": {
                                         "type": "object",
-                                        "description": "event handler input",
+                                        "description": "Handler params",
                                         "properties": {
-                                            "time-span": {
+                                            "uri": {
                                                 "type": "string",
-                                                "default": "minute"
-                                            },
-                                            "message": {
-                                                "type": "string",
-                                                "default": "${}"
-                                            },
-                                            "limit": {
-                                                "type": "integer",
-                                                "default": 1001
+                                                "default": "petstore.swagger.io/v2/pet/3",
+                                                "description": "Handler params uri"
                                             }
+                                        },
+                                        "additionalProperties": {
+                                            "type": "string"
                                         }
                                     },
                                     "reference": {
@@ -261,76 +222,96 @@
                                         "properties": {
                                             "data": {
                                                 "type": "object",
+                                                "description": "Handler definition data",
                                                 "properties": {
                                                     "flow": {
                                                         "type": "object",
+                                                        "description": "Handler flow",
                                                         "properties": {
                                                             "type": {
                                                                 "type": "integer",
+                                                                "description": "Handler type",
                                                                 "default": 1
                                                             },
                                                             "attributes": {
-                                                                "type": "array"
+                                                                "type": "array",
+                                                                "description": "Handler attributes"
                                                             },
                                                             "rootTask": {
                                                                 "type": "object",
+                                                                "description": "Handler rootTask",
                                                                 "properties": {
                                                                     "id": {
                                                                         "type": "integer",
+                                                                        "description": "Handler rootTask id",
                                                                         "default": 1
                                                                     },
                                                                     "type": {
                                                                         "type": "integer",
+                                                                        "description": "Handler rootTask type",
                                                                         "default": 1
                                                                     },
                                                                     "tasks": {
                                                                         "type": "array",
+                                                                        "description": "Handler rootTask task array",
                                                                         "items": {
                                                                             "type": "object",
                                                                             "properties": {
                                                                                 "id": {
                                                                                     "type": "integer",
-                                                                                    "default": 2
+                                                                                    "default": 2,
+                                                                                    "description": "Handler rootTask task id"
                                                                                 },
                                                                                 "name": {
                                                                                     "type": "string",
-                                                                                    "default": "Log Message"
+                                                                                    "default": "Log Message",
+                                                                                    "description": "Handler rootTask task name"
                                                                                 },
                                                                                 "description": {
                                                                                     "type": "string",
-                                                                                    "default": "Simple Log Activity"
+                                                                                    "default": "Simple Log Activity",
+                                                                                    "description": "Handler rootTask task description"
                                                                                 },
                                                                                 "type": {
                                                                                     "type": "integer",
-                                                                                    "default": 1
+                                                                                    "default": 1,
+                                                                                    "description": "Handler rootTask task type"
                                                                                 },
                                                                                 "activityType": {
                                                                                     "type": "string",
-                                                                                    "default": "tibco-log"
+                                                                                    "default": "tibco-log",
+                                                                                    "description": "Handler rootTask task activity type"
                                                                                 },
                                                                                 "activityRef": {
                                                                                     "type": "string",
-                                                                                    "default": "github.com/TIBCOSoftware/flogo-contrib/activity/log"
+                                                                                    "default": "github.com/TIBCOSoftware/flogo-contrib/activity/log",
+                                                                                    "description": "Handler rootTask task activity reference"
                                                                                 },
                                                                                 "attributes": {
                                                                                     "type": "array",
+                                                                                    "description": "Handler rootTask task activity attributes",
                                                                                     "items": {
                                                                                         "type": "object",
+                                                                                        "description": "Handler rootTask task activity attributes object",
                                                                                         "properties": {
                                                                                             "name": {
                                                                                                 "type": "string",
+                                                                                                "description": "Handler rootTask task activity attributes name",
                                                                                                 "default": "message"
                                                                                             },
                                                                                             "value": {
                                                                                                 "type": "string",
+                                                                                                "description": "Handler rootTask task activity attributes value",
                                                                                                 "default": "${}"
                                                                                             },
                                                                                             "required": {
                                                                                                 "type": "boolean",
+                                                                                                "description": "Handler rootTask task activity attributes required property",
                                                                                                 "default": false
                                                                                             },
                                                                                             "type": {
                                                                                                 "type": "string",
+                                                                                                "description": "Handler rootTask task activity attributes type property",
                                                                                                 "default": "string"
                                                                                             }
                                                                                         }
@@ -340,10 +321,12 @@
                                                                         }
                                                                     },
                                                                     "links": {
-                                                                        "type": "array"
+                                                                        "type": "array",
+                                                                        "description": "Handler rootTask links"
                                                                     },
                                                                     "attributes": {
-                                                                        "type": "array"
+                                                                        "type": "array",
+                                                                        "description": "Handler rootTask attributes"
                                                                     }
                                                                 }
                                                             }
@@ -353,29 +336,24 @@
                                             },
                                             "id": {
                                                 "type": "string",
+                                                "description": "Handler definition id",
                                                 "default": "order_success_handler"
                                             },
                                             "ref": {
                                                 "type": "string",
+                                                "description": "Handler definition ref",
                                                 "default": "github.com/TIBCOSoftware/flogo-contrib/action/flow"
                                             }
                                         }
                                     },
                                     "params": {
                                         "type": "object",
-                                        "description": "event handler input",
+                                        "description": "Handler params",
                                         "properties": {
-                                            "time-span": {
+                                            "uri": {
                                                 "type": "string",
-                                                "default": "minute"
-                                            },
-                                            "message": {
-                                                "type": "string",
-                                                "default": "${}"
-                                            },
-                                            "limit": {
-                                                "type": "integer",
-                                                "default": 1001
+                                                "default": "petstore.swagger.io/v2/pet/3",
+                                                "description": "Handler params uri"
                                             }
                                         }
                                     }
@@ -383,68 +361,57 @@
                                 "additionalProperties": false
                             }
                         ]
-                    }
+                    },
+                    "additionalProperties": false
                 },
                 "event_links": {
                     "type": "array",
-                    "description": "Application triggers",
+                    "description": "Gateway event links",
                     "items": {
                         "type": "object",
                         "description": "event links Object",
                         "required": [
-                            "trigger",
-                            "success_paths"
+                            "triggers",
+                            "dispatches"
                         ],
                         "default": {
-                            "trigger": "rest_trigger",
-                            "success_paths": [
+                            "triggers": "rest_trigger",
+                            "dispatches": [
                                 {
+                                    "if": "${}",
                                     "handler": "get_pet_success_handler"
                                 }
                             ]
                         },
                         "properties": {
-                            "trigger": {
+                            "triggers": {
                                 "type": "string",
-                                "description": "event-links triggers",
+                                "description": "Event links triggers",
                                 "default": ""
                             },
-                            "success-paths": {
+                            "dispatches": {
                                 "type": "array",
-                                "description": "event-links success path",
+                                "description": "Event links dispatch",
                                 "items": {
                                     "type": "object",
                                     "properties": {
-                                        "condition": {
+                                        "if": {
                                             "type": "string",
-                                            "default": "${trigger.content.Country == \"USA\"}"
+                                            "description": "Event links dispatch if condition",
+                                            "default": "${trigger == \"\"}"
                                         },
                                         "handler": {
                                             "type": "string",
+                                            "description": "Event links dispatch handler",
                                             "default": "SuccessHandler"
                                         }
                                     }
                                 }
-                            },
-                            "error-paths": {
-                                "type": "array",
-                                "description": "event-links error path",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "condition": {
-                                            "type": "string",
-                                            "default": ""
-                                        },
-                                        "handler": {
-                                            "type": "string",
-                                            "default": "ErrorHandler"
-                                        }
-                                    }
-                                }
                             }
-                        }
-                    }
+                        },
+                        "additionalProperties": false
+                    },
+                    "additionalProperties": false
                 }
             },
             "additionalProperties": false

@@ -16,21 +16,21 @@
                         "event_handlers",
                         "event_links"
                     ],
-                    "description": "Mashling json gateway object",
+                    "description": "Mashling gateway object",
                     "properties": {
                         "name": {
                             "default": "demoapp",
-                            "description": "My Mashling application name",
+                            "description": "Mashling gateway name",
                             "type": "string"
                         },
                         "version": {
                             "default": "1.0.0",
-                            "description": "version number",
+                            "description": "Mashling gateway version",
                             "type": "string"
                         },
                         "description": {
                             "default": "My Mashling application description",
-                            "description": "Application description",
+                            "description": "Mashling gateway description",
                             "type": "string"
                         },
                         "configurations": {
@@ -66,7 +66,9 @@
                             "type": "github.com/wnichols/kafkasub",
                             "description": "Configuration for kafka cluster",
                             "settings": {
-                                "BrokerUrl": "localhost:9092"
+                                "BrokerUrl": "localhost:9092",
+                                "username":"",
+                                "password":""
                             }
                         }
                     ],
@@ -76,9 +78,7 @@
                             "description": "The trigger on 'pets' endpoint",
                             "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
                             "settings": {
-                                "port": "9096",
-                                "method": "GET",
-                                "path": "/pets/:petId"
+                                
                             }
                         }
                     ],
@@ -94,9 +94,10 @@
                     ],
                     "event_links": [
                         {
-                            "trigger": "rest_trigger",
-                            "success_paths": [
+                            "triggers": "rest_trigger",
+                            "dispatches": [
                                 {
+                                    "if":"${}",
                                     "handler": "get_pet_success_handler"
                                 }
                             ]
@@ -107,7 +108,7 @@
             "properties": {
                 "gateway": {
                     "type": "object",
-                    "description": "Mashling json gateway object",
+                    "description": "Mashling gateway object",
                     "required": [
                         "name",
                         "version",
@@ -119,17 +120,17 @@
                     "properties": {
                         "name": {
                             "default": "",
-                            "description": "My Mashling application name",
+                            "description": "Mashling gateway name",
                             "type": "string"
                         },
                         "version": {
                             "default": "1.0.0",
-                            "description": "version number",
+                            "description": "Mashling Gateway version",
                             "type": "string"
                         },
                         "description": {
                             "default": "My Mashling application description",
-                            "description": "Application description",
+                            "description": "Mashling Gateway description",
                             "type": "string"
                         },
                         "configurations": {

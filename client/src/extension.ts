@@ -108,10 +108,10 @@ export function activate(context: ExtensionContext) {
 				["[", "]"],
 				["(", ")"]
 			],
-			onEnterRules:[{
-				beforeText:new RegExp("  - "),
+			onEnterRules: [{
+				beforeText: new RegExp("  - "),
 				action: {
-					indentAction:1
+					indentAction: 1
 				}
 			}]
 		});
