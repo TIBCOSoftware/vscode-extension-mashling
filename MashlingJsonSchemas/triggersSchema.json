@@ -1,10 +1,10 @@
 {
     "triggers": {
         "type": "array",
-        "description": "Application triggers",
+        "description": "Gateway Triggers",
         "items": {
             "type": "object",
-            "description": "triggers Object",
+            "description": "Triggers Object",
             "required": ["name", "type", "settings"],
             "default": {
 				"name": "rest_trigger",
@@ -17,28 +17,29 @@
             "properties": {
                 "name": {
                     "default": "",
-                    "description": "kafkaConfig",
+                    "description": "Trigger name",
                     "type": "string"
                 },
                 "type": {
                     "default": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkaConsumer",
-                    "description": "version number",
+                    "description": "Trigger type",
                     "type": "string"
                 },
                 "description": {
                     "default": "The trigger on 'orders' topic",
-                    "description": "Configuration for kafka cluster",
+                    "description": "Trigger description",
                     "type": "string"
                 },
                 "settings": {
                     "type": "object",
-                    "description": "input object",
+                    "description": "Trigger settings",
                     "default": {
                        
                     }
                 }
             },
             "additionalProperties": false
-        }
+        },
+        "additionalProperties":false
     }
 }
