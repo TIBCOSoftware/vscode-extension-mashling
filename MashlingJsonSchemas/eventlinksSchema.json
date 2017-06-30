@@ -10,7 +10,7 @@
                 "dispatches"
             ],
             "default": {
-                "triggers": "rest_trigger",
+                "triggers": ["rest_trigger"],
                 "dispatches": [
                     {
                         "if":"${}",
@@ -20,7 +20,7 @@
             },
             "properties": {
                 "triggers": {
-                    "type": "string",
+                    "type": "array",
                     "description": "Event links triggers",
                     "default": ""
                 },

@@ -78,7 +78,9 @@
                             "description": "The trigger on 'pets' endpoint",
                             "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
                             "settings": {
-                                
+                                 "port": "9096",
+					             "method": "GET",
+					             "path": "/pets/:petId"
                             }
                         }
                     ],
@@ -94,7 +96,7 @@
                     ],
                     "event_links": [
                         {
-                            "triggers": "rest_trigger",
+                            "triggers": ["rest_trigger"],
                             "dispatches": [
                                 {
                                     "if":"${}",
