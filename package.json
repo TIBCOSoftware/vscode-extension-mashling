@@ -25,12 +25,12 @@
     "commands": [
       {
         "command": "mashling.createSampleGateway",
-        "title": "Create Sample Gateway",
+        "title": "Create Sample Mashling",
         "category": "Mashling"
       },
       {
         "command": "mashling.createGatewayUsingGatewayDescriptor",
-        "title": "Create Gateway using gateway descriptor",
+        "title": "Create Mashling using current descriptor",
         "category": "Mashling"
       },
       {
