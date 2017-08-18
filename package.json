@@ -17,6 +17,7 @@
     "onLanguage:json",
     "onCommand:mashling.createSampleGateway",
     "onCommand:mashling.createGatewayUsingGatewayDescriptor",
+    "onCommand:mashling.generateSampleDescriptor",
     "onCommand:mashling.installMashling",
     "onCommand:mashling.updateMashling"
   ],
@@ -42,6 +43,11 @@
         "command": "mashling.updateMashling",
         "title": "Update Mashling",
         "category": "Mashling"
+      },
+      {
+        "command": "mashling.generateSampleDescriptor",
+        "title": "Generate Sample Descriptor",
+        "category": "Mashling"
       }
     ],
     "configuration": {
@@ -53,7 +59,8 @@
         "fileMatch": "*.mashling.json",
         "url": "./MashlingJsonSchemas/mashlingJsonSchema.json"
       }
-    ]
+    ],
+    "snippets": []
   },
   "scripts": {
     "vscode:prepublish": "tsc -p ./",
@@ -62,10 +69,12 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
-    "typescript": "^2.0.3",
-    "vscode": "^1.0.3",
-    "mocha": "^2.3.3",
+    "@types/mocha": "^2.2.32",
     "@types/node": "^6.0.40",
-    "@types/mocha": "^2.2.32"
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
+    "mocha": "^2.3.3",
+    "typescript": "^2.0.3",
+    "vscode": "^1.0.3"
   }
 }

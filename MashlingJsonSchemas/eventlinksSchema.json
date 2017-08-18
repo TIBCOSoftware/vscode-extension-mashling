@@ -20,9 +20,11 @@
             },
             "properties": {
                 "triggers": {
-                    "type": "string",
+                    "type": "array",
                     "description": "event-links triggers",
-                    "default": ""
+                    "items":{
+                        "type": "string"
+                    }
                 },
                 "dispatches": {
                     "type": "array",
