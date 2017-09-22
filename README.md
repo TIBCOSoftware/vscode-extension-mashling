@@ -28,6 +28,7 @@ You can install the extension using the VS Code --install-extension command line
 First download the mashling-support-0.0.1.vsix file and navigate to the folder. Then run the command:
 ```
 code --install-extension mashling-support-0.0.1.vsix
+(Refer https://code.visualstudio.com/docs/setup/mac#_command-line how to set 'code' command in the PATH)
 ```
 Alternatively You can manually install a VS Code extension packaged in a .vsix file. Using the Install from VSIX... command in the Extensions View command drop-down, or the Extensions: Install from VSIX... command in the Command Palette, point to the .vsix file.
 
