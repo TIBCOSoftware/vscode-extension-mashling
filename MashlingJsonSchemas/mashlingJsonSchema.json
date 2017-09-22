@@ -118,7 +118,8 @@
                             ]
                         }
                     ]
-                }
+                },
+                "mashling_schema":""
             },
             "required": [
                 "mashling_schema",
