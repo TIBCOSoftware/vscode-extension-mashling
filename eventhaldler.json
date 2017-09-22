@@ -41,7 +41,7 @@
                 },
                 "params": {
                     "type": "object",
-                    "description": "event handler params",
+                    "description": "event handler input",
                     "properties": {
                         "time-span": {
                             "type": "string",

@@ -13,7 +13,7 @@
                 "triggers": "rest_trigger",
                 "dispatches": [
                     {
-                        "if":"${}",
+                        "if":"${condition here}",
                         "handler": "get_pet_success_handler"
                     }
                 ]
@@ -31,6 +31,9 @@
                     "description": "event-links success path",
                     "items": {
                         "type": "object",
+                        "required": [
+                            "handler"
+                        ],
                         "properties": {
                             "if": {
                                 "type": "string",
@@ -43,7 +46,8 @@
                         }
                     }
                 }
-            }
+            },
+            "additionalProperties": false
         }
     }
 }

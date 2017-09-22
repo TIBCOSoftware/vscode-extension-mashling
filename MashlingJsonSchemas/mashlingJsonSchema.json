@@ -5,6 +5,10 @@
             "$schema": "",
             "type": "object",
             "default": {},
+            "required": [
+                "mashling_schema",
+                "gateway"
+            ],
             "properties": {
                 "gateway": {
                     "type": "object",
@@ -47,6 +51,9 @@
                         }
                     },
                     "additionalProperties": false
+                },
+                "mashling_schema" : {
+                    "type": "string"
                 }
             },
             "additionalProperties": false
@@ -67,8 +74,8 @@
                             "description": "Configuration for kafka cluster",
                             "settings": {
                                 "BrokerUrl": "localhost:9092",
-                                "username":"",
-                                "password":""
+                                "username": "",
+                                "password": ""
                             }
                         }
                     ],
@@ -77,9 +84,7 @@
                             "name": "rest_trigger",
                             "description": "The trigger on 'pets' endpoint",
                             "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
-                            "settings": {
-                                
-                            }
+                            "settings": {}
                         }
                     ],
                     "event_handlers": [
@@ -97,7 +102,7 @@
                             "triggers": "rest_trigger",
                             "dispatches": [
                                 {
-                                    "if":"${}",
+                                    "if": "${}",
                                     "handler": "get_pet_success_handler"
                                 }
                             ]
@@ -105,6 +110,10 @@
                     ]
                 }
             },
+            "required": [
+                "mashling_schema",
+                "gateway"
+            ],
             "properties": {
                 "gateway": {
                     "type": "object",
@@ -147,6 +156,9 @@
                         }
                     },
                     "additionalProperties": false
+                },
+                "mashling_schema" : {
+                    "type": "string"
                 }
             },
             "additionalProperties": false
