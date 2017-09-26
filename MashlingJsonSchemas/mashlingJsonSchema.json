@@ -5,6 +5,10 @@
             "$schema": "",
             "type": "object",
             "default": {},
+            "required": [
+                "mashling_schema",
+                "gateway"
+            ],
             "properties": {
                 "gateway": {
                     "type": "object",
@@ -16,21 +20,31 @@
                         "event_handlers",
                         "event_links"
                     ],
-                    "description": "Mashling gateway object",
+                    "description": "Mashling json gateway object",
                     "properties": {
                         "name": {
                             "default": "demoapp",
-                            "description": "Mashling gateway name",
+                            "description": "My Mashling application name",
                             "type": "string"
                         },
                         "version": {
                             "default": "1.0.0",
-                            "description": "Mashling gateway version",
+                            "description": "version number",
                             "type": "string"
                         },
                         "description": {
                             "default": "My Mashling application description",
-                            "description": "Mashling gateway description",
+                            "description": "Application description",
+                            "type": "string"
+                        },
+                        "display_name": {
+                            "default": "",
+                            "description": "display_name",
+                            "type": "string"
+                        },
+                        "display_image": {
+                            "default": "",
+                            "description": "display_image",
                             "type": "string"
                         },
                         "configurations": {
@@ -47,6 +61,9 @@
                         }
                     },
                     "additionalProperties": false
+                },
+                "mashling_schema": {
+                    "type": "string"
                 }
             },
             "additionalProperties": false
@@ -67,8 +84,8 @@
                             "description": "Configuration for kafka cluster",
                             "settings": {
                                 "BrokerUrl": "localhost:9092",
-                                "username":"",
-                                "password":""
+                                "username": "",
+                                "password": ""
                             }
                         }
                     ],
@@ -77,11 +94,7 @@
                             "name": "rest_trigger",
                             "description": "The trigger on 'pets' endpoint",
                             "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
-                            "settings": {
-                                 "port": "9096",
-					             "method": "GET",
-					             "path": "/pets/:petId"
-                            }
+                            "settings": {}
                         }
                     ],
                     "event_handlers": [
@@ -99,18 +112,23 @@
                             "triggers": ["rest_trigger"],
                             "dispatches": [
                                 {
-                                    "if":"${}",
+                                    "if": "${}",
                                     "handler": "get_pet_success_handler"
                                 }
                             ]
                         }
                     ]
-                }
+                },
+                "mashling_schema":""
             },
+            "required": [
+                "mashling_schema",
+                "gateway"
+            ],
             "properties": {
                 "gateway": {
                     "type": "object",
-                    "description": "Mashling gateway object",
+                    "description": "Mashling json gateway object",
                     "required": [
                         "name",
                         "version",
@@ -122,17 +140,27 @@
                     "properties": {
                         "name": {
                             "default": "",
-                            "description": "Mashling gateway name",
+                            "description": "My Mashling application name",
                             "type": "string"
                         },
                         "version": {
                             "default": "1.0.0",
-                            "description": "Mashling Gateway version",
+                            "description": "version number",
                             "type": "string"
                         },
                         "description": {
                             "default": "My Mashling application description",
-                            "description": "Mashling Gateway description",
+                            "description": "Application description",
+                            "type": "string"
+                        },
+                        "display_name": {
+                            "default": "",
+                            "description": "display_name",
+                            "type": "string"
+                        },
+                        "display_image": {
+                            "default": "",
+                            "description": "display_image",
                             "type": "string"
                         },
                         "configurations": {
@@ -149,6 +177,9 @@
                         }
                     },
                     "additionalProperties": false
+                },
+                "mashling_schema": {
+                    "type": "string"
                 }
             },
             "additionalProperties": false
