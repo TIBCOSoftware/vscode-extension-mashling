@@ -33,7 +33,7 @@ code --install-extension mashling-support-0.0.1.vsix
 Alternatively You can manually install a VS Code extension packaged in a .vsix file. Using the Install from VSIX... command in the Extensions View command drop-down, or the Extensions: Install from VSIX... command in the Command Palette, point to the .vsix file.
 
 ## License
-mashling-recipes is licensed under a BSD-type license. See license text [here](https://github.com/TIBCOSoftware/vscode-extension-mashling/issues/TIBCO%20LICENSE.txt).
+vscode-extension-mashling is licensed under a BSD-type license. See license text [here](https://github.com/TIBCOSoftware/vscode-extension-mashling/blob/master/TIBCO%20LICENSE.txt).
 
 ## Support
 You can post your questions via [GitHub issues](https://github.com/TIBCOSoftware/vscode-extension-mashling/issues).
