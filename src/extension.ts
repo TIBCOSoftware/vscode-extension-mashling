@@ -7,6 +7,13 @@ import { MASHLING_MODE } from './MashlingMode';
 import { MashlingCompletionItemProvider } from './MashlingCompletions';
 
 export function activate(context: ExtensionContext) {
+	// Copy strings
+	const pathPromptMsg = "Enter the path where mashling app should be created";
+	const appNamePromptMsg = "Enter the application name";
+	const gatewayCreateInfoMsg = "Gateway is being created. Refer to command prompt for more info";
+	const pathErrorMsg = "Please go to the mashling descriptor file window to run the create app";
+	const installMashlingCmd = "go get github.com/TIBCOSoftware/mashling/...";
+	const updateMashlingCmd = "go get -u github.com/TIBCOSoftware/mashling/...";
 	//get terminal window
 	let terminal = vscode.window.createTerminal('mashling-cli');
 	//Register all the commands
@@ -35,25 +42,28 @@ export function activate(context: ExtensionContext) {
 
 	function createSampleGateway() {
 
-		vscode.window.showInputBox({ prompt: 'Enter the path where mashling app should be created' })
+		vscode.window.showInputBox({ prompt: pathPromptMsg })
 			.then(function (path) {
-				var driveName = path.split(':')[0] + ':';
-				terminal.show(true);
-				terminal.sendText(driveName);
-				terminal.sendText('cd ' + path);
-				vscode.window.showInputBox({ prompt: 'Enter the application name' })
-					.then(function (appName) {
-						terminal.show(true);
-						terminal.sendText('mashling create ' + appName);
-						vscode.window.showInformationMessage("Sample Gateway is being created. Refer to command prompt for more info");
-					});
+				if (path) {
+					var driveName = path.split(':')[0] + ':';
+					terminal.sendText(driveName);
+					terminal.sendText('cd ' + path);
+					vscode.window.showInputBox({ prompt: appNamePromptMsg })
+						.then(function (appName) {
+							if (appName) {
+								terminal.show(true);
+								terminal.sendText('mashling create ' + appName);
+								vscode.window.showInformationMessage(gatewayCreateInfoMsg);
+							}
+						});
+				}
 			});
 	}
 
 	function createGatewayUsingGatewayDescriptor() {
 
 		let activeDocPath = vscode.window.activeTextEditor.document.uri.path;
-		let openedFileName = path.basename(activeDocPath) //activeDocPath.substring(activeDocPath.lastIndexOf('/') + 1);
+		let openedFileName = path.basename(activeDocPath);
 
 		if (openedFileName.endsWith("mashling.json")) {
 			//TODO: check if schema of open file is valid		
@@ -66,27 +76,28 @@ export function activate(context: ExtensionContext) {
 				var activeDirName = path.dirname(activeDocPath);
 			}
 			terminal.sendText('cd ' + activeDirName);
-			vscode.window.showInputBox({ prompt: 'Enter the application name' })
+			vscode.window.showInputBox({ prompt: appNamePromptMsg })
 				.then(function (appName) {
-					terminal.show(true);
-					terminal.sendText("mashling create -f " + openedFileName + " " + appName);
-					vscode.window.showInformationMessage("Gateway is being created. Refer to command prompt for more info");
+					if (appName) {
+						terminal.show(true);
+						terminal.sendText("mashling create -f " + openedFileName + " " + appName);
+						vscode.window.showInformationMessage(gatewayCreateInfoMsg);
+					}
 				});
 		} else {
-			vscode.window.showErrorMessage("Please go to the mashling descriptor file window to run the create app");
+			vscode.window.showErrorMessage(pathErrorMsg);
 		}
-
 
 	}
 
 	function installMashling() {
 		terminal.show(true);
-		terminal.sendText("go get github.com/TIBCOSoftware/mashling-cli/...");
+		terminal.sendText(installMashlingCmd);
 	}
 
 	function updateMashling() {
 		terminal.show(true);
-		terminal.sendText("go get -u github.com/TIBCOSoftware/mashling-cli/...");
+		terminal.sendText(updateMashlingCmd);
 	}
 	context.subscriptions.push(vscode.languages.registerCompletionItemProvider(MASHLING_MODE, new MashlingCompletionItemProvider(), ':', '\"'));
 }

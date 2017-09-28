@@ -9,7 +9,7 @@
             "default": {
 				"name": "rest_trigger",
 				"description": "The trigger on 'pets' endpoint",
-				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
+				"type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
 				"settings": {
 					
 				}
@@ -21,7 +21,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "default": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkaConsumer",
+                    "default": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
                     "description": "Trigger type",
                     "type": "string"
                 },
