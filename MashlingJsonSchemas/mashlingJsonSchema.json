@@ -80,7 +80,7 @@
                     "configurations": [
                         {
                             "name": "kafkaConfig",
-                            "type": "github.com/wnichols/kafkasub",
+                            "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/kafkasubrouter",
                             "description": "Configuration for kafka cluster",
                             "settings": {
                                 "BrokerUrl": "localhost:9092",
@@ -93,7 +93,7 @@
                         {
                             "name": "rest_trigger",
                             "description": "The trigger on 'pets' endpoint",
-                            "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
+                            "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
                             "settings": {}
                         }
                     ],
@@ -101,7 +101,7 @@
                         {
                             "name": "get_pet_success_handler",
                             "description": "Handle the pet access",
-                            "reference": "github.com/TIBCOSoftware/mashling-lib/flow/flogo.json",
+                            "reference": "github.com/TIBCOSoftware/mashling/lib/flow/flogo.json",
                             "params": {
                                 "uri": "petstore.swagger.io/v2/pet/3"
                             }
