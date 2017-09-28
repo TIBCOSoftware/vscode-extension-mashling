@@ -81,12 +81,12 @@ export function activate(context: ExtensionContext) {
 
 	function installMashling() {
 		terminal.show(true);
-		terminal.sendText("go get github.com/TIBCOSoftware/mashling-cli/...");
+		terminal.sendText("go get github.com/TIBCOSoftware/mashling/...");
 	}
 
 	function updateMashling() {
 		terminal.show(true);
-		terminal.sendText("go get -u github.com/TIBCOSoftware/mashling-cli/...");
+		terminal.sendText("go get -u github.com/TIBCOSoftware/mashling/...");
 	}
 	context.subscriptions.push(vscode.languages.registerCompletionItemProvider(MASHLING_MODE, new MashlingCompletionItemProvider(), ':', '\"'));
 }
