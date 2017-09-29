@@ -1,6 +1,6 @@
 # mashling-vscode-extension
 
-Project Mashling VSCode Extension
+Project Mashling<sup>TM</sup> VSCode Extension
 
 ## Features
 
