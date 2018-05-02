@@ -38,3 +38,6 @@ vscode-extension-mashling is licensed under a BSD-type license. See license text
 ## Support
 You can post your questions via [GitHub issues](https://github.com/TIBCOSoftware/vscode-extension-mashling/issues).
 
+## Schema version supported
+version 1.0
+
