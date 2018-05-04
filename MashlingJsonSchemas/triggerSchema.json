@@ -1,0 +1,72 @@
+{
+    "trigger": {
+        "required": [
+            "name",
+            "type",
+            "handlers"
+        ],
+        "properties": {
+            "description": {
+                "type": "string",
+                "default": "trigger Description",
+                "description":"trigger Description"
+            },
+            "handlers": {
+                "items": {
+                    "$schema": "http://json-schema.org/draft-04/schema#",
+                    "$ref": "handlerSchema.json#/handler"
+                },
+                "type": "array",
+                "description":"trigger handlers"
+            },
+            "name": {
+                "type": "string",
+                "default":"MyProxy1",
+                "description":"trigger name"
+            },
+            "settings": {
+                "patternProperties": {
+                    ".*": {
+                        "additionalProperties": true,
+                        "type": [
+                            "array",
+                            "boolean",
+                            "integer",
+                            "number",
+                            "null",
+                            "object",
+                            "string"
+                        ]
+                    }
+                },
+                "type": "object",
+                "description":"trigger settings"
+            },
+            "type": {
+                "type": "string",
+                "default":"github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+                "description":"trigger type"
+            }
+        },
+        "additionalProperties": false,
+        "default": {
+            "name": "MyProxy1",
+            "description": "Animals MQTT trigger - PUT animal details",
+            "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+            "settings": {
+                "port": "9096"
+            },
+            "handlers": [
+                {
+                    "dispatch": "Mqtt_Producer",
+                    "settings": {
+                        "method": "POST",
+                        "path": "/test",
+                        "optimize": "true"
+                    }
+                }
+            ]
+        },
+        "type": "object"
+    }
+}

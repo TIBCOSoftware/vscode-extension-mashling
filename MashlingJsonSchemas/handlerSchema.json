@@ -1,0 +1,43 @@
+{
+    "handler": {
+        "required": [
+            "dispatch"
+        ],
+        "properties": {
+            "dispatch": {
+                "type": "string",
+                "description":"dispatch name",
+                "default":"dispatch name"
+            },
+            "settings": {
+                "patternProperties": {
+                    ".*": {
+                        "additionalProperties": true,
+                        "type": [
+                            "array",
+                            "boolean",
+                            "integer",
+                            "number",
+                            "null",
+                            "object",
+                            "string"
+                        ]
+                    }
+                },
+                "type": "object",
+                "description":"dispatch settings"
+            }
+        },
+        "additionalProperties": false,
+        "description": "handlers description",
+        "default": {
+            "dispatch": "Mqtt_Producer",
+            "settings": {
+                "method": "POST",
+                "path": "/test",
+                "optimize": "true"
+            }
+        },
+        "type": "object"
+    }
+}

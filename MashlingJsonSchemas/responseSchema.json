@@ -1,0 +1,42 @@
+{
+    "response":{
+        "required": [
+            "error"
+        ],
+        "properties": {
+            "complex": {
+                "type": "boolean"
+            },
+            "error": {
+                "type": "boolean"
+            },
+            "if": {
+                "type": "string"
+            },
+            "output": {
+                "patternProperties": {
+                    ".*": {
+                        "additionalProperties": true,
+                        "type": [
+                            "array",
+                            "boolean",
+                            "integer",
+                            "number",
+                            "null",
+                            "object",
+                            "string"
+                        ]
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "additionalProperties": false,
+        "default":{
+            "complex":false,
+            "error":false,
+            "if":"${}"
+        },
+        "type": "object"
+    }
+}

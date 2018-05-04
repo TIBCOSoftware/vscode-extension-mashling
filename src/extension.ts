@@ -4,7 +4,6 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import { workspace, Disposable, ExtensionContext, DocumentFilter, HoverProvider, TextDocument, Position, Hover, MarkedString, CancellationToken } from 'vscode';
 import { MASHLING_MODE } from './MashlingMode';
-import { MashlingCompletionItemProvider } from './MashlingCompletions';
 
 export function activate(context: ExtensionContext) {
 	// Copy strings
@@ -99,5 +98,4 @@ export function activate(context: ExtensionContext) {
 		terminal.show(true);
 		terminal.sendText(updateMashlingCmd);
 	}
-	context.subscriptions.push(vscode.languages.registerCompletionItemProvider(MASHLING_MODE, new MashlingCompletionItemProvider(), ':', '\"'));
 }

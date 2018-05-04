@@ -1,0 +1,61 @@
+{
+    "steps": {
+        "required": [
+            "service"
+        ],
+        "properties": {
+            "if": {
+                "type": "string",
+                "default": "${}",
+                "description": "if condition for steps"
+            },
+            "input": {
+                "patternProperties": {
+                    ".*": {
+                        "additionalProperties": true,
+                        "type": [
+                            "array",
+                            "boolean",
+                            "integer",
+                            "number",
+                            "null",
+                            "object",
+                            "string"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "output": {
+                "patternProperties": {
+                    ".*": {
+                        "additionalProperties": true,
+                        "type": [
+                            "array",
+                            "boolean",
+                            "integer",
+                            "number",
+                            "null",
+                            "object",
+                            "string"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "service": {
+                "type": "string",
+                "default": "mqtt_producer",
+                "description": "service for steps"
+            }
+        },
+        "default": {
+            "service": "mqtt_producer",
+            "input": {
+                "inputs.content": "${payload.content}"
+            }
+        },
+        "additionalProperties": false,
+        "type": "object"
+    }
+}

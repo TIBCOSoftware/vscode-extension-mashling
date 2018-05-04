@@ -1,0 +1,52 @@
+{
+    "service":{
+        "required": [
+            "name",
+            "type"
+        ],
+        "properties": {
+            "description": {
+                "type": "string",
+                "description":"Service description",
+                "default":"Service description"
+            },
+            "name": {
+                "type": "string",
+                "description":"Service name",
+                "default":"Service name"
+            },
+            "settings": {
+                "patternProperties": {
+                    ".*": {
+                        "additionalProperties": true,
+                        "type": [
+                            "array",
+                            "boolean",
+                            "integer",
+                            "number",
+                            "null",
+                            "object",
+                            "string"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "type": {
+                "type": "string",
+                "description":"Service type",
+                "default":"Service type"
+            }
+        },
+        "default":{
+            "name": "mqtt_producer",
+            "description": "Make PUT calls against a remote HTTP service using a Flogo flow.",
+            "type": "flogoFlow",
+            "settings": {
+              "reference": "github.com/TIBCOSoftware/mashling/lib/flow/MQTTProducer.json"
+            }
+          },
+        "additionalProperties": false,
+        "type": "object"
+    }
+}
