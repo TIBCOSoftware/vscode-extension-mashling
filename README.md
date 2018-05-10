@@ -12,9 +12,7 @@ Project Mashling<sup>TM</sup> VSCode Extension
 
 * __Json validation__ : Validates the json against predefined schema.
 
-* __Create Mashling gateway__ : Once the json is ready , Mashling gateway can be created directly through vscode command palette.
-
-* __Create sample gateway__ : A sample Mashling gateway can be created directly through vscode command palette.
+* __Build Mashling Gateway__ : Build mashling gateway. 
 
 * __Install and update Mashling cli__ : Install or update Mashling just by running a vscode command.
 
