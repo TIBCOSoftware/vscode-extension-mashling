@@ -7,12 +7,10 @@ import { MASHLING_MODE } from './MashlingMode';
 
 export function activate(context: ExtensionContext) {
 	// Copy strings
-	const pathPromptMsg = "Enter the path where mashling app should be created";
-	const appNamePromptMsg = "Enter the application name";
-	const gatewayCreateInfoMsg = "Gateway is being created. Refer to command prompt for more info";
-	const pathErrorMsg = "Please go to the mashling descriptor file window to run the create app";
-	const installMashlingCmd = "go get github.com/TIBCOSoftware/mashling/...";
-	const updateMashlingCmd = "go get -u github.com/TIBCOSoftware/mashling/...";
+	const gatewayBuildInfoMsg = "Build is in progress. Refer to command prompt for more info";
+	const installOrUpdateMashlingCmd = "go get -u github.com/TIBCOSoftware/mashling/...";
+	const BuildMashlingCmd = 'go run build.go buildgateway';
+	const goPathError = "GOPATH not set";
 	//get terminal window
 	let terminal = vscode.window.createTerminal('mashling-cli');
 	//Register all the commands
@@ -21,81 +19,36 @@ export function activate(context: ExtensionContext) {
 
 	function registerCommands() {
 
-		context.subscriptions.push(vscode.commands.registerCommand('mashling.createSampleGateway', () => {
-			createSampleGateway();
-		}));
-
-		context.subscriptions.push(vscode.commands.registerCommand('mashling.createGatewayUsingGatewayDescriptor', () => {
-			createGatewayUsingGatewayDescriptor();
+		context.subscriptions.push(vscode.commands.registerCommand('mashling.buildMashling', () => {
+			buildMashling();
 		}));
 
 		context.subscriptions.push(vscode.commands.registerCommand('mashling.installMashling', () => {
-			installMashling();
+			installOrUpdateMashling();
 		}));
 
 		context.subscriptions.push(vscode.commands.registerCommand('mashling.updateMashling', () => {
-			updateMashling();
+			installOrUpdateMashling();
 		}));
 
 	}
 
-	function createSampleGateway() {
-
-		vscode.window.showInputBox({ prompt: pathPromptMsg })
-			.then(function (path) {
-				if (path) {
-					var driveName = path.split(':')[0] + ':';
-					terminal.sendText(driveName);
-					terminal.sendText('cd ' + path);
-					vscode.window.showInputBox({ prompt: appNamePromptMsg })
-						.then(function (appName) {
-							if (appName) {
-								terminal.show(true);
-								terminal.sendText('mashling create ' + appName);
-								vscode.window.showInformationMessage(gatewayCreateInfoMsg);
-							}
-						});
-				}
-			});
-	}
-
-	function createGatewayUsingGatewayDescriptor() {
-
-		let activeDocPath = vscode.window.activeTextEditor.document.uri.path;
-		let openedFileName = path.basename(activeDocPath);
-
-		if (openedFileName.endsWith("mashling.json")) {
-			//TODO: check if schema of open file is valid		
-			var winOSFilePathSeparator = "\\";
-			if (path.sep === winOSFilePathSeparator) {
-				var activeDirName = path.dirname(activeDocPath).substring(1);
-				let drivename = activeDirName.split(":")[0];
-				terminal.sendText(drivename + ":");
-			} else {
-				var activeDirName = path.dirname(activeDocPath);
-			}
-			terminal.sendText('cd ' + activeDirName);
-			vscode.window.showInputBox({ prompt: appNamePromptMsg })
-				.then(function (appName) {
-					if (appName) {
-						terminal.show(true);
-						terminal.sendText("mashling create -f " + openedFileName + " " + appName);
-						vscode.window.showInformationMessage(gatewayCreateInfoMsg);
-					}
-				});
+	function buildMashling() {
+		let gopath = process.env.GOPATH;
+		if(gopath){
+			let mashlingPath = gopath + '/src/github.com/TIBCOSoftware/mashling/'; 
+			terminal.sendText('cd ' + mashlingPath);
+			terminal.show(true);
+			terminal.sendText(BuildMashlingCmd);
+			vscode.window.showInformationMessage(gatewayBuildInfoMsg);
 		} else {
-			vscode.window.showErrorMessage(pathErrorMsg);
-		}
-
+			vscode.window.showErrorMessage(goPathError);
+		}		
 	}
 
-	function installMashling() {
-		terminal.show(true);
-		terminal.sendText(installMashlingCmd);
-	}
 
-	function updateMashling() {
+	function installOrUpdateMashling() {
 		terminal.show(true);
-		terminal.sendText(updateMashlingCmd);
+		terminal.sendText(installOrUpdateMashlingCmd);
 	}
 }
