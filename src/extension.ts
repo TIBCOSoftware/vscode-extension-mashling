@@ -8,6 +8,8 @@ import { MASHLING_MODE } from './MashlingMode';
 export function activate(context: ExtensionContext) {
 	// Copy strings
 	const gatewayBuildInfoMsg = "Build is in progress. Refer to command prompt for more info";
+	const InstallationInfoMsg = "Mashling Installation is in progress. Refer to command prompt for more info";
+	const UpdateInfoMsg = "Mashling Update is in progress. Refer to command prompt for more info";
 	const installOrUpdateMashlingCmd = "go get -u github.com/TIBCOSoftware/mashling/...";
 	const BuildMashlingCmd = 'go run build.go buildgateway';
 	const goPathError = "GOPATH not set";
@@ -24,11 +26,11 @@ export function activate(context: ExtensionContext) {
 		}));
 
 		context.subscriptions.push(vscode.commands.registerCommand('mashling.installMashling', () => {
-			installOrUpdateMashling();
+			installOrUpdateMashling('install');
 		}));
 
 		context.subscriptions.push(vscode.commands.registerCommand('mashling.updateMashling', () => {
-			installOrUpdateMashling();
+			installOrUpdateMashling('update');
 		}));
 
 	}
@@ -47,8 +49,15 @@ export function activate(context: ExtensionContext) {
 	}
 
 
-	function installOrUpdateMashling() {
+	function installOrUpdateMashling(cmd) {
+		var infoMsg;
+		if(cmd == 'install'){
+			infoMsg = InstallationInfoMsg;
+		} else{
+			infoMsg = UpdateInfoMsg;
+		}
 		terminal.show(true);
 		terminal.sendText(installOrUpdateMashlingCmd);
+		vscode.window.showInformationMessage(infoMsg);
 	}
 }
