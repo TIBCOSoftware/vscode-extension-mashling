@@ -7,12 +7,15 @@ import { MASHLING_MODE } from './MashlingMode';
 
 export function activate(context: ExtensionContext) {
 	// Copy strings
-	const gatewayBuildInfoMsg = "Build is in progress. Refer to command prompt for more info";
-	const InstallationInfoMsg = "Mashling Installation is in progress. Refer to command prompt for more info";
-	const UpdateInfoMsg = "Mashling Update is in progress. Refer to command prompt for more info";
+	const gatewayBuildInfoMsg = "Build is in progress. Please refer to command prompt for more info";
+	const InstallationInfoMsg = "Mashling Installation is in progress. Please refer to command prompt for more info";
+	const UpdateInfoMsg = "Mashling Update is in progress. Please refer to command prompt for more info";
 	const installOrUpdateMashlingCmd = "go get -u github.com/TIBCOSoftware/mashling/...";
-	const BuildMashlingCmd = 'go run build.go buildgateway';
+	const BuildMashlingCmd = "go run build.go buildgateway";
+	const RunMashlingCmd = "mashling-gateway -c ";
 	const goPathError = "GOPATH not set";
+	const runInfoMsg = "Running mashling-gateway with provided config. Please refer to command prompt for more info";
+	const runErrorMsg = "Please go to the path where gateway configuration file is kept";
 	//get terminal window
 	let terminal = vscode.window.createTerminal('mashling-cli');
 	//Register all the commands
@@ -20,6 +23,10 @@ export function activate(context: ExtensionContext) {
 	registerCommands();
 
 	function registerCommands() {
+
+		context.subscriptions.push(vscode.commands.registerCommand('mashling.runMashling', () => {
+			runMashling();
+		}));
 
 		context.subscriptions.push(vscode.commands.registerCommand('mashling.buildMashling', () => {
 			buildMashling();
@@ -59,5 +66,19 @@ export function activate(context: ExtensionContext) {
 		terminal.show(true);
 		terminal.sendText(installOrUpdateMashlingCmd);
 		vscode.window.showInformationMessage(infoMsg);
+	}
+
+	function runMashling(){
+		let activeDocPath = vscode.window.activeTextEditor.document.uri.path;
+		let openedFileName = path.basename(activeDocPath);
+		let dirname = path.dirname(activeDocPath);
+		if (openedFileName.endsWith("mashling.json")) {
+			terminal.show(true);
+			terminal.sendText('cd ' + dirname);
+			terminal.sendText(RunMashlingCmd + openedFileName);
+			vscode.window.showInformationMessage(runInfoMsg);
+		} else{
+			vscode.window.showErrorMessage(runErrorMsg);
+		}
 	}
 }
