@@ -14,6 +14,8 @@ Project Mashling<sup>TM</sup> VSCode Extension
 
 * __Build Mashling Gateway__ : Build mashling gateway. 
 
+* __Run Mashling Gateway__ : Run mashling gateway. 
+
 * __Install and update Mashling cli__ : Install or update Mashling just by running a vscode command.
 
 Press `Ctrl + shift + p` and search for the commands starting with `mashling`. Following commands are available:
@@ -37,5 +39,5 @@ vscode-extension-mashling is licensed under a BSD-type license. See license text
 You can post your questions via [GitHub issues](https://github.com/TIBCOSoftware/vscode-extension-mashling/issues).
 
 ## Schema version supported
-version 1.0
+version 2.0
 
