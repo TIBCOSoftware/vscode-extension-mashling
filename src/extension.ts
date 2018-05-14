@@ -3,7 +3,6 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { workspace, Disposable, ExtensionContext, DocumentFilter, HoverProvider, TextDocument, Position, Hover, MarkedString, CancellationToken } from 'vscode';
-import { MASHLING_MODE } from './MashlingMode';
 
 export function activate(context: ExtensionContext) {
 	// Copy strings
@@ -24,8 +23,8 @@ export function activate(context: ExtensionContext) {
 
 	function registerCommands() {
 
-		context.subscriptions.push(vscode.commands.registerCommand('mashling.runMashling', () => {
-			runMashling();
+		context.subscriptions.push(vscode.commands.registerCommand('mashling.runMashlingGateway', () => {
+			runMashlingGateway();
 		}));
 
 		context.subscriptions.push(vscode.commands.registerCommand('mashling.buildMashling', () => {
@@ -40,6 +39,20 @@ export function activate(context: ExtensionContext) {
 			installOrUpdateMashling('update');
 		}));
 
+	}
+
+	function runMashlingGateway(){
+		let activeDocPath = vscode.window.activeTextEditor.document.uri.path;
+		let openedFileName = path.basename(activeDocPath);
+		let dirname = path.dirname(activeDocPath);
+		if (openedFileName.endsWith("mashling.json")) {
+			terminal.show(true);
+			terminal.sendText('cd ' + dirname);
+			terminal.sendText(RunMashlingCmd + openedFileName);
+			vscode.window.showInformationMessage(runInfoMsg);
+		} else{
+			vscode.window.showErrorMessage(runErrorMsg);
+		}
 	}
 
 	function buildMashling() {
@@ -68,17 +81,4 @@ export function activate(context: ExtensionContext) {
 		vscode.window.showInformationMessage(infoMsg);
 	}
 
-	function runMashling(){
-		let activeDocPath = vscode.window.activeTextEditor.document.uri.path;
-		let openedFileName = path.basename(activeDocPath);
-		let dirname = path.dirname(activeDocPath);
-		if (openedFileName.endsWith("mashling.json")) {
-			terminal.show(true);
-			terminal.sendText('cd ' + dirname);
-			terminal.sendText(RunMashlingCmd + openedFileName);
-			vscode.window.showInformationMessage(runInfoMsg);
-		} else{
-			vscode.window.showErrorMessage(runErrorMsg);
-		}
-	}
 }

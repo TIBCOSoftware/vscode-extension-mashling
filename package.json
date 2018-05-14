@@ -1,6 +1,6 @@
 {
-  "name": "mashling-support",
-  "description": "mashling config edit support",
+  "name": "mashling-vscode-extension",
+  "description": "Vscode plugin for Editing, building and running Mashling gateway",
   "version": "2.0.0",
   "publisher": "TIBCOSoftware",
   "repository": {
@@ -15,7 +15,7 @@
   ],
   "activationEvents": [
     "onLanguage:json",
-    "onCommand:mashling.runMashling",
+    "onCommand:mashling.runMashlingGateway",
     "onCommand:mashling.buildMashling",
     "onCommand:mashling.installMashling",
     "onCommand:mashling.updateMashling"
@@ -24,7 +24,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "mashling.runMashling",
+        "command": "mashling.runMashlingGateway",
         "title": "Run Mashling Gateway",
         "category": "Mashling"
       },
