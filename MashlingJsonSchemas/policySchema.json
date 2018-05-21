@@ -1,0 +1,49 @@
+{
+    "policy": {
+        "required": [
+            "name",
+            "type"
+        ],
+        "properties": {
+            "description": {
+                "type": "string",
+                "description":"Policy description",
+                "default":"Policy description"
+            },
+            "name": {
+                "type": "string",
+                "description":"Policy name",
+                "default":"Policy name"
+            },
+            "settings": {
+                "patternProperties": {
+                    ".*": {
+                        "additionalProperties": true,
+                        "type": [
+                            "array",
+                            "boolean",
+                            "integer",
+                            "number",
+                            "null",
+                            "object",
+                            "string"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "type": {
+                "type": "string",
+                "description":"Policy type",
+                "default":"Policy type"
+            }
+        },
+        "default":{
+            "name":"policy1",
+            "type":"policy type",
+            "description":"policy description"
+        },
+        "additionalProperties": false,
+        "type": "object"
+    }
+}

@@ -1,8 +1,8 @@
 {
-  "name": "mashling-support",
-  "description": "mashling config edit support",
-  "version": "0.0.1",
-  "publisher": "tbhatia",
+  "name": "mashling-vscode-extension",
+  "description": "Vscode plugin for Editing, building and running Mashling gateway",
+  "version": "2.0.0",
+  "publisher": "TIBCOSoftware",
   "repository": {
     "url": "https://github.com/TIBCOSoftware/mashling-vscode-extension"
   },
@@ -15,8 +15,8 @@
   ],
   "activationEvents": [
     "onLanguage:json",
-    "onCommand:mashling.createSampleGateway",
-    "onCommand:mashling.createGatewayUsingGatewayDescriptor",
+    "onCommand:mashling.runMashlingGateway",
+    "onCommand:mashling.buildMashling",
     "onCommand:mashling.installMashling",
     "onCommand:mashling.updateMashling"
   ],
@@ -24,13 +24,13 @@
   "contributes": {
     "commands": [
       {
-        "command": "mashling.createSampleGateway",
-        "title": "Create Sample Mashling",
+        "command": "mashling.runMashlingGateway",
+        "title": "Run Mashling Gateway",
         "category": "Mashling"
       },
       {
-        "command": "mashling.createGatewayUsingGatewayDescriptor",
-        "title": "Create Mashling using current descriptor",
+        "command": "mashling.buildMashling",
+        "title": "Build Mashling Gateway",
         "category": "Mashling"
       },
       {

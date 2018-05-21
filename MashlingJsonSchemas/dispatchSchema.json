@@ -1,0 +1,40 @@
+{
+    "dispatch": {
+        "required": [
+            "name",
+            "routes"
+        ],
+        "properties": {
+            "name": {
+                "type": "string",
+                "default":"Mqtt_Producer",
+                "description":"dispatcher name"
+            },
+            "routes": {
+                "items": {
+                    "$schema": "http://json-schema.org/draft-04/schema#",
+                    "$ref": "routesSchema.json#/routes"
+                },
+                "type": "array"
+            }
+        },
+        "additionalProperties": false,
+        "description": "description for dispatch property",
+        "default": {
+            "name": "Mqtt_Producer",
+            "routes": [
+                {
+                    "steps": [
+                        {
+                            "service": "mqtt_producer",
+                            "input": {
+                                "inputs.content": "${payload.content}"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "type": "object"
+    }
+}

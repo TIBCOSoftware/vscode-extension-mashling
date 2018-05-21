@@ -1,0 +1,50 @@
+{
+    "routes": {
+        "required": [
+            "steps"
+        ],
+        "properties": {
+            "async": {
+                "type": "boolean",
+                "default": false
+            },
+            "if": {
+                "type": "string",
+                "default": "if condition",
+                "description": "if condition for conditional routing"
+            },
+            "policies": {
+                "items": {
+                    "type": "string"
+                },
+                "type": "array"
+            },
+            "responses": {
+                "items": {
+                    "$schema": "http://json-schema.org/draft-04/schema#",
+                    "$ref": "responseSchema.json#/response"
+                },
+                "type": "array"
+            },
+            "steps": {
+                "items": {
+                    "$schema": "http://json-schema.org/draft-04/schema#",
+                    "$ref": "stepsSchema.json#/steps"
+                },
+                "type": "array"
+            }
+        },
+        "default": {
+            "steps": [
+                {
+                    "service": "mqtt_producer",
+                    "input": {
+                        "inputs.content": "${payload.content}"
+                    }
+                }
+            ]
+        },
+        "additionalProperties": false,
+        "type": "object"
+    }
+}
