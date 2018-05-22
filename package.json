@@ -1,6 +1,6 @@
 {
   "name": "mashling-support",
-  "displayName": "mashling-support",
+  "displayName": "Mashling vscode Extension",
   "description": "Vscode plugin for Editing, building and Running Mashling Gateway",
   "version": "0.0.2",
   "publisher": "TIBCOSoftware",
