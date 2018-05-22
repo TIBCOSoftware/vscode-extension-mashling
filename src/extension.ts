@@ -17,6 +17,8 @@ export function activate(context: ExtensionContext) {
 	const runErrorMsg = "Please go to the path where gateway configuration file is kept";
 	//get terminal window
 	let terminal = vscode.window.createTerminal('mashling-cli');
+	let pathSep = path.sep;
+	let windowsPathSep = "\\";
 	//Register all the commands
 
 	registerCommands();
@@ -45,6 +47,9 @@ export function activate(context: ExtensionContext) {
 		let activeDocPath = vscode.window.activeTextEditor.document.uri.path;
 		let openedFileName = path.basename(activeDocPath);
 		let dirname = path.dirname(activeDocPath);
+		if(pathSep == windowsPathSep){
+			dirname = dirname.substring(1);
+		}
 		if (openedFileName.endsWith("mashling.json")) {
 			terminal.show(true);
 			terminal.sendText('cd ' + dirname);
@@ -59,6 +64,7 @@ export function activate(context: ExtensionContext) {
 		let gopath = process.env.GOPATH;
 		if(gopath){
 			let mashlingPath = gopath + '/src/github.com/TIBCOSoftware/mashling/'; 
+			console.log(gopath);
 			terminal.sendText('cd ' + mashlingPath);
 			terminal.show(true);
 			terminal.sendText(BuildMashlingCmd);

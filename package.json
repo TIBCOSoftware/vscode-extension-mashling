@@ -1,12 +1,13 @@
 {
-  "name": "mashling-vscode-extension",
-  "description": "Vscode plugin for Editing, building and running Mashling gateway",
-  "version": "2.0.0",
+  "name": "mashling-support",
+  "displayName": "mashling-support",
+  "description": "Vscode plugin for Editing, building and Running Mashling Gateway",
+  "version": "0.0.2",
   "publisher": "TIBCOSoftware",
   "repository": {
     "url": "https://github.com/TIBCOSoftware/mashling-vscode-extension"
   },
-  "license": "",
+  "license": "SEE LICENSE IN TIBCO LICENSE.txt",
   "engines": {
     "vscode": "^1.8.0"
   },
