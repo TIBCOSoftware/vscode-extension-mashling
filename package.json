@@ -1,8 +1,8 @@
 {
   "name": "mashling-support",
-  "displayName": "Mashling vscode Extension",
+  "displayName": "Mashling tools for vscode",
   "description": "Vscode plugin for Editing, building and Running Mashling Gateway",
-  "version": "0.0.2",
+  "version": "0.4.0",
   "publisher": "TIBCOSoftware",
   "repository": {
     "url": "https://github.com/TIBCOSoftware/mashling-vscode-extension"
@@ -61,6 +61,7 @@
     "compile": "tsc -watch -p ./",
     "update-vscode": "node ./node_modules/vscode/bin/install",
     "postinstall": "node ./node_modules/vscode/bin/install"
+
   },
   "devDependencies": {
     "typescript": "^2.0.3",
@@ -68,5 +69,5 @@
     "mocha": "^2.3.3",
     "@types/node": "^6.0.40",
     "@types/mocha": "^2.2.32"
-  }
+  } 
 }
