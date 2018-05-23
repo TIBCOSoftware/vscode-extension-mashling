@@ -19,8 +19,13 @@ export function activate(context: ExtensionContext) {
 	let terminal = vscode.window.createTerminal('mashling-cli');
 	let pathSep = path.sep;
 	let windowsPathSep = "\\";
+	let v1ExtensionId = 'tbhatia.mashling-support';
+	let ext = vscode.extensions.getExtension(v1ExtensionId);
+	if (ext) {
+		detectAnduninstallOlderVersion();
+	}
 	//Register all the commands
-	detectAnduninstallOlderVersion();
+
 	registerCommands();
 
 	function registerCommands() {
@@ -43,11 +48,11 @@ export function activate(context: ExtensionContext) {
 
 	}
 
-	function runMashlingGateway(){
+	function runMashlingGateway() {
 		let activeDocPath = vscode.window.activeTextEditor.document.uri.path;
 		let openedFileName = path.basename(activeDocPath);
 		let dirname = path.dirname(activeDocPath);
-		if(pathSep == windowsPathSep){
+		if (pathSep == windowsPathSep) {
 			dirname = dirname.substring(1);
 		}
 		if (openedFileName.endsWith("mashling.json")) {
@@ -55,15 +60,15 @@ export function activate(context: ExtensionContext) {
 			terminal.sendText('cd ' + dirname);
 			terminal.sendText(RunMashlingCmd + openedFileName);
 			vscode.window.showInformationMessage(runInfoMsg);
-		} else{
+		} else {
 			vscode.window.showErrorMessage(runErrorMsg);
 		}
 	}
 
 	function buildMashling() {
 		let gopath = process.env.GOPATH;
-		if(gopath){
-			let mashlingPath = gopath + '/src/github.com/TIBCOSoftware/mashling/'; 
+		if (gopath) {
+			let mashlingPath = gopath + '/src/github.com/TIBCOSoftware/mashling/';
 			console.log(gopath);
 			terminal.sendText('cd ' + mashlingPath);
 			terminal.show(true);
@@ -71,15 +76,15 @@ export function activate(context: ExtensionContext) {
 			vscode.window.showInformationMessage(gatewayBuildInfoMsg);
 		} else {
 			vscode.window.showErrorMessage(goPathError);
-		}		
+		}
 	}
 
 
 	function installOrUpdateMashling(cmd) {
 		var infoMsg;
-		if(cmd == 'install'){
+		if (cmd == 'install') {
 			infoMsg = InstallationInfoMsg;
-		} else{
+		} else {
 			infoMsg = UpdateInfoMsg;
 		}
 		terminal.show(true);
@@ -87,18 +92,16 @@ export function activate(context: ExtensionContext) {
 		vscode.window.showInformationMessage(infoMsg);
 	}
 
-	function detectAnduninstallOlderVersion(){
-		let v1ExtensionId = 'tbhatia.mashling-support';
-		let ext = vscode.extensions.getExtension(v1ExtensionId);
-			if(ext){
-				terminal.sendText("code --uninstall-extension " + v1ExtensionId);
-				// vscode.window.showInformationMessage("Older version of mashling extension removed. Reload Now to activate.", {title:'Reload Now'}).then(function(val){
-				// 	if(val.title == 'Reload Now'){
-				// 		vscode.commands.executeCommand("workbench.action.reloadWindow");
-				// 	}
-				// });
-				vscode.commands.executeCommand("workbench.action.reloadWindow");
-			}	
+	function detectAnduninstallOlderVersion() {
+		var terminalU = vscode.window.createTerminal('uninstall');
+		terminalU.sendText("code --uninstall-extension " + v1ExtensionId);
+		setTimeout(function () {
+			vscode.window.showInformationMessage("Older version of mashling extension removed. Reload Now to activate.", { title: 'Reload Now' }).then(function (val) {
+				if (val.title == 'Reload Now') {
+					vscode.commands.executeCommand("workbench.action.reloadWindow");
+				}
+			});
+		}, 1000);
 	}
 
 }
