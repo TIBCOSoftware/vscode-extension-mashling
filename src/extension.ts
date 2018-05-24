@@ -64,7 +64,6 @@ export function activate(context: ExtensionContext) {
 		let gopath = process.env.GOPATH;
 		if (gopath) {
 			let mashlingPath = gopath + '/src/github.com/TIBCOSoftware/mashling/';
-			console.log(gopath);
 			terminal.sendText('cd ' + mashlingPath);
 			terminal.show(true);
 			terminal.sendText(BuildMashlingCmd);
