@@ -4,9 +4,6 @@
             "error"
         ],
         "properties": {
-            "complex": {
-                "type": "boolean"
-            },
             "error": {
                 "type": "boolean"
             },
@@ -14,8 +11,15 @@
                 "type": "string"
             },
             "output": {
-                "patternProperties": {
-                    ".*": {
+                "required": [
+                    "data"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "default": 200
+                    },
+                    "data": {
                         "additionalProperties": true,
                         "type": [
                             "array",
@@ -28,14 +32,17 @@
                         ]
                     }
                 },
+                "additionalProperties": false,
                 "type": "object"
             }
         },
         "additionalProperties": false,
         "default":{
-            "complex":false,
             "error":false,
-            "if":"${}"
+            "if":"${}",
+            "output":{
+                "data" : ""
+            }
         },
         "type": "object"
     }
