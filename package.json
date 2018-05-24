@@ -3,7 +3,7 @@
   "displayName": "Mashling tools for vscode",
   "description": "Vscode plugin for Editing, building and Running Mashling Gateway",
   "version": "0.4.0",
-  "publisher": "TIBCOSoftware",
+  "publisher": "tbhatia",
   "repository": {
     "url": "https://github.com/TIBCOSoftware/mashling-vscode-extension"
   },
