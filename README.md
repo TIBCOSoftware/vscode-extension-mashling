@@ -32,7 +32,8 @@ code --install-extension mashling-support-0.0.2.vsix
 ```
 Alternatively You can manually install a VS Code extension packaged in a .vsix file. Using the Install from VSIX... command in the Extensions View command drop-down, or the Extensions: Install from VSIX... command in the Command Palette, point to the .vsix file.
 
-Note that you'll have to make sure that the mashling configuration filename should be in the format '*.mashling.json'. Schema validation will only be activated in the file with specified filename format.
+Note that you'll have to make sure that the mashling configuration filename should be in the format '*.mashling.json'.
+Schema validation will only be activated in the file with specified filename format.
 
 ## License
 vscode-extension-mashling is licensed under a BSD-type license. See license text [here](https://github.com/TIBCOSoftware/vscode-extension-mashling/blob/master/TIBCO%20LICENSE.txt).
